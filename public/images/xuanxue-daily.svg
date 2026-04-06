@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="620" viewBox="0 0 420 620">
+  <defs>
+    <clipPath id="screen-clip">
+      <rect width="420" height="620" rx="16"/>
+    </clipPath>
+    <linearGradient id="fade-bottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0E1621" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0E1621" stop-opacity="1"/>
+    </linearGradient>
+    <clipPath id="content-clip">
+      <rect x="0" y="0" width="420" height="570"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="420" height="620" rx="16" fill="#0E1621"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="420" height="52" fill="#17212B"/>
+
+  <!-- Back arrow -->
+  <text x="14" y="32" font-family="system-ui" font-size="18" fill="#5CAAEA">‹</text>
+
+  <!-- Channel avatar -->
+  <circle cx="68" cy="26" r="18" fill="#2B5278"/>
+  <text x="68" y="31" font-family="system-ui" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="600">小夏</text>
+
+  <!-- Channel name -->
+  <text x="92" y="22" font-family="-apple-system, system-ui" font-size="14" font-weight="600" fill="#FFFFFF">小夏crypto天氣預報</text>
+
+  <!-- Subscriber count -->
+  <text x="92" y="38" font-family="-apple-system, system-ui" font-size="12" fill="#6C7883">1,284 subscribers</text>
+
+  <!-- Verified badge -->
+  <circle cx="198" cy="20" r="6" fill="#5CAAEA"/>
+  <text x="198" y="24" font-family="system-ui" font-size="9" fill="#FFFFFF" text-anchor="middle">✓</text>
+
+  <!-- Content area with clip -->
+  <g clip-path="url(#content-clip)">
+
+    <!-- Date badge -->
+    <rect x="148" y="62" width="124" height="22" rx="11" fill="#17212B"/>
+    <text x="210" y="77" font-family="-apple-system, system-ui" font-size="11" fill="#6C7883" text-anchor="middle">2026年4月5日</text>
+
+    <!-- Message block -->
+    <rect x="10" y="94" width="400" height="460" rx="8" fill="#17212B"/>
+
+    <!-- Line 1: Date -->
+    <text x="24" y="116" font-family="-apple-system, system-ui" font-size="11.5" fill="#E8E8E8">📅 國曆：2026-04-05　🗓️ 農曆：二月十八</text>
+    <text x="24" y="132" font-family="-apple-system, system-ui" font-size="12" fill="#AAAAAA">小夏crypto天氣預報</text>
+
+    <!-- Divider -->
+    <line x1="24" y1="143" x2="396" y2="143" stroke="#2B3A4A" stroke-width="1"/>
+
+    <!-- 天時量能 -->
+    <text x="24" y="162" font-family="-apple-system, system-ui" font-size="12.5" font-weight="700" fill="#5CAAEA">✨ 【天時量能】</text>
+    <text x="24" y="179" font-family="-apple-system, system-ui" font-size="11.5" fill="#E0E0E0">今日指標：</text>
+    <text x="96" y="179" font-family="-apple-system, system-ui" font-size="11.5" fill="#FFD700" font-weight="700">5.9</text>
+    <text x="114" y="179" font-family="-apple-system, system-ui" font-size="11.5" fill="#E0E0E0">（偏多，中等波動）</text>
+    <text x="24" y="195" font-family="-apple-system, system-ui" font-size="11" fill="#AAAAAA">紫微流日主星帶來權威引領，武曲化祿</text>
+    <text x="24" y="210" font-family="-apple-system, system-ui" font-size="11" fill="#AAAAAA">利於財富增長，但文曲化忌造成信息混亂。</text>
+
+    <!-- Divider -->
+    <line x1="24" y1="222" x2="396" y2="222" stroke="#2B3A4A" stroke-width="1"/>
+
+    <!-- 市場情緒 -->
+    <text x="24" y="240" font-family="-apple-system, system-ui" font-size="12.5" font-weight="700" fill="#5CAAEA">🫀 【市場情緒】</text>
+    <text x="24" y="257" font-family="-apple-system, system-ui" font-size="11.5" fill="#E0E0E0">情緒指標：</text>
+    <text x="96" y="257" font-family="-apple-system, system-ui" font-size="11.5" fill="#FFA07A" font-weight="700">4.5</text>
+    <text x="114" y="257" font-family="-apple-system, system-ui" font-size="11.5" fill="#E0E0E0">（觀望型，控制-波動混合）</text>
+    <text x="24" y="273" font-family="-apple-system, system-ui" font-size="11" fill="#AAAAAA">Gate 21「咬合」帶來強烈的意志力與控制</text>
+    <text x="24" y="288" font-family="-apple-system, system-ui" font-size="11" fill="#AAAAAA">欲望，市場參與者尋求掌握自身決策。</text>
+
+    <!-- Divider -->
+    <line x1="24" y1="300" x2="396" y2="300" stroke="#2B3A4A" stroke-width="1"/>
+
+    <!-- 市場趨勢 -->
+    <text x="24" y="318" font-family="-apple-system, system-ui" font-size="12.5" font-weight="700" fill="#5CAAEA">📈 【市場趨勢】</text>
+
+    <!-- Trend badge -->
+    <rect x="24" y="326" width="100" height="22" rx="4" fill="#1A3A2A"/>
+    <text x="74" y="341" font-family="-apple-system, system-ui" font-size="11.5" fill="#4CAF50" text-anchor="middle" font-weight="700">震盪偏多 67%</text>
+
+    <text x="24" y="363" font-family="-apple-system, system-ui" font-size="11" fill="#AAAAAA">天時量能(5.9)與市場情緒(4.5)形成1.4分差距</text>
+    <text x="24" y="378" font-family="-apple-system, system-ui" font-size="11" fill="#AAAAAA">技術面偏多但人心面謹慎。</text>
+
+    <!-- Divider -->
+    <line x1="24" y1="390" x2="396" y2="390" stroke="#2B3A4A" stroke-width="1"/>
+
+    <!-- 能量時段 -->
+    <text x="24" y="408" font-family="-apple-system, system-ui" font-size="12.5" font-weight="700" fill="#5CAAEA">⏰ 【能量時段分析】</text>
+
+    <!-- Time slot pills -->
+    <rect x="24" y="416" width="80" height="18" rx="3" fill="#2B3A4A"/>
+    <text x="64" y="429" font-family="-apple-system, system-ui" font-size="10" fill="#AAAAAA" text-anchor="middle">9:00-11:00</text>
+    <text x="115" y="429" font-family="-apple-system, system-ui" font-size="10.5" fill="#FFA07A">能量 5/10</text>
+
+    <rect x="24" y="438" width="80" height="18" rx="3" fill="#2B3A4A"/>
+    <text x="64" y="451" font-family="-apple-system, system-ui" font-size="10" fill="#AAAAAA" text-anchor="middle">11:00-13:00</text>
+    <text x="115" y="451" font-family="-apple-system, system-ui" font-size="10.5" fill="#FFA07A">能量 6/10</text>
+
+    <rect x="24" y="460" width="80" height="18" rx="3" fill="#1A3A2A"/>
+    <text x="64" y="473" font-family="-apple-system, system-ui" font-size="10" fill="#4CAF50" text-anchor="middle" font-weight="700">14:00-16:00</text>
+    <text x="115" y="473" font-family="-apple-system, system-ui" font-size="10.5" fill="#4CAF50" font-weight="700">能量 8/10 🔑</text>
+
+    <rect x="24" y="482" width="80" height="18" rx="3" fill="#2B3A4A"/>
+    <text x="64" y="495" font-family="-apple-system, system-ui" font-size="10" fill="#AAAAAA" text-anchor="middle">19:00-23:00</text>
+    <text x="115" y="495" font-family="-apple-system, system-ui" font-size="10.5" fill="#FFA07A">能量 7/10</text>
+
+    <!-- Timestamp + views -->
+    <text x="306" y="543" font-family="-apple-system, system-ui" font-size="11" fill="#6C7883">👁 2,841</text>
+    <text x="368" y="543" font-family="-apple-system, system-ui" font-size="11" fill="#6C7883">09:00</text>
+
+  </g>
+
+  <!-- Fade overlay at bottom -->
+  <rect x="0" y="480" width="420" height="90" fill="url(#fade-bottom)"/>
+
+  <!-- Bottom nav bar -->
+  <rect x="0" y="580" width="420" height="40" fill="#17212B"/>
+  <text x="30" y="604" font-family="system-ui" font-size="20" fill="#6C7883">📎</text>
+  <rect x="68" y="586" width="280" height="26" rx="13" fill="#2B3A4A"/>
+  <text x="208" y="604" font-family="-apple-system, system-ui" font-size="12" fill="#6C7883" text-anchor="middle">Message</text>
+  <text x="376" y="604" font-family="system-ui" font-size="18" fill="#5CAAEA">🎤</text>
+
+  <!-- Outer border -->
+  <rect x="0.5" y="0.5" width="419" height="619" rx="15.5" fill="none" stroke="#2B3A4A" stroke-width="1"/>
+</svg>

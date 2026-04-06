@@ -1,0 +1,672 @@
+---
+// plans.astro — 方案頁
+import Layout from '../layouts/Layout.astro';
+import Calculator from '../components/Calculator.astro';
+---
+
+<Layout title="方案" description="先了解 X翻倉計畫 的打法、手續費、入群條件，再決定你的路線。">
+
+  <!-- ============================================================
+       Page Hero
+       ============================================================ -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-number">01</span>
+      <h1 class="page-title" data-reveal="up">先了解這個打法。</h1>
+      <span class="amber-rule" style="margin-top: 2rem;"></span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 1 — 打單方式（完整）
+       ============================================================ -->
+  <section class="full-method">
+    <div class="container">
+    <div class="full-method-body" data-stagger>
+      <p data-reveal="up">
+        我用 1 分鐘或 3 分鐘 K 線打單<br />
+        配合玄學流日判斷當天能量方向<br />
+        找到進場點，設好槓桿，短時間內出場。
+      </p>
+
+      <h3 class="method-question" data-reveal="up">為什麼不看更大的時區？</h3>
+
+      <p data-reveal="up">
+        不是不能看，是現在的市場<br />
+        流動性變慢、長時區的方向不好判斷<br />
+        持倉一晚上，換來的可能是焦慮和利潤回吐。
+      </p>
+
+      <p data-reveal="up">
+        我選擇把視野放小——<br />
+        每一筆單都有意識，每一次出場都是決定。
+      </p>
+
+      <p data-reveal="up">
+        這個打法有爭議<br />
+        高槓桿、高手續費、高頻率<br />
+        但對我來說，這是目前市場裡<br />
+        最能讓人睡得著、也拿得到利潤的方式。
+      </p>
+
+      <p class="method-invite" data-reveal="up">
+        如果這個打法讓你有感覺，往下看。
+      </p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 2 — 手續費公式
+       ============================================================ -->
+  <section class="fee-section" data-reveal="up">
+    <div class="container">
+    <span class="section-number">02</span>
+    <h2 class="fee-title">手續費怎麼算，先搞清楚。</h2>
+
+    <div class="fee-formula">
+      <p class="formula-main">手續費 ＝ 總倉位價值 × 費率</p>
+      <p class="formula-note">（不是你的本金，是你撬動的總部位）</p>
+    </div>
+
+    <div class="scenarios">
+      <div class="scenario">
+        <span class="scenario-label">情境 A — 10 倍槓桿 / 100U 本金</span>
+        <p class="scenario-calc">100U × 10 = 1,000U 部位 → Taker 0.06%</p>
+        <p class="scenario-fee">手續費：0.60 USDT <em>（單邊）</em></p>
+        <p class="scenario-insight">來回一次約 1.2U，佔本金 1.2%</p>
+      </div>
+
+      <div class="scenario">
+        <span class="scenario-label">情境 B — 50 倍槓桿 / 100U 本金</span>
+        <p class="scenario-calc">100U × 50 = 5,000U 部位 → Taker 0.06%</p>
+        <p class="scenario-fee">手續費：3.00 USDT <em>（單邊）</em></p>
+        <p class="scenario-insight">來回一次約 6U，佔本金 6%——每筆必須有明確利潤</p>
+      </div>
+
+      <div class="scenario">
+        <span class="scenario-label">情境 C — 200 倍槓桿 / 100U 本金</span>
+        <p class="scenario-calc">100U × 200 = 20,000U 部位 → Taker 0.06%</p>
+        <p class="scenario-fee">手續費：12.00 USDT <em>（單邊）</em></p>
+        <p class="scenario-insight">高槓桿的代價。這就是為什麼進場點必須精準。</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 3 — 200倍比較
+       ============================================================ -->
+  <section class="leverage-compare" data-reveal="up">
+    <div class="container">
+    <span class="section-number">03</span>
+    <h2 class="compare-title">200 倍是什麼感覺？</h2>
+    <p class="compare-subtitle">同樣 100U 本金，不同槓桿，你控制的部位完全不同。</p>
+
+    <div class="compare-table" data-stagger>
+      <div class="compare-row" data-reveal="up">
+        <span class="compare-leverage">10 倍</span>
+        <span class="compare-dots">··················</span>
+        <span class="compare-result">1,000U <em class="compare-gain">（+5%）</em></span>
+      </div>
+      <div class="compare-row" data-reveal="up">
+        <span class="compare-leverage">50 倍</span>
+        <span class="compare-dots">··················</span>
+        <span class="compare-result">5,000U <em class="compare-gain">（+25%）</em></span>
+      </div>
+      <div class="compare-row compare-row--big" data-reveal="up">
+        <span class="compare-leverage compare-leverage--big">200 倍</span>
+        <span class="compare-dots">··················</span>
+        <span class="compare-result compare-result--big">20,000U <em class="compare-gain">（+100%）</em></span>
+      </div>
+    </div>
+
+    <div class="compare-note" data-reveal="up">
+      <p>我們用全倉方式做單<br />整個帳戶都是你的緩衝，不是只有單筆保證金。</p>
+      <p>
+        真正的保護不是帳戶餘額<br />
+        是你清楚知道自己為什麼在這個位置進場<br />
+        以及什麼時候應該出去。
+      </p>
+    </div>
+
+    <p class="compare-close" data-reveal="up">Know why you're in. Know when to leave.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 4 — 計算機
+       ============================================================ -->
+  <section class="calc-section" data-reveal="scale">
+    <div class="container">
+      <span class="section-number" style="text-align:center; display:block; margin-bottom:1.5rem;">04 &nbsp; 試算器</span>
+      <Calculator />
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 5 — 兩條路
+       ============================================================ -->
+  <section class="two-paths">
+    <div class="container">
+    <span class="section-number" style="margin-bottom:2rem; display:block;">05</span>
+    <h2 class="paths-title" data-reveal="up">你想要什麼？</h2>
+
+    <div class="paths-grid">
+      <div class="path-left" data-reveal="left">
+        <h3 class="path-name">X翻倉計畫</h3>
+        <p class="path-tagline">限收 30 人，有篩選<br />免費開始，兩個月後再談。</p>
+
+        <ul class="path-list">
+          <li>— 交易指標（兩個月免費）</li>
+          <li>— 玄學日報</li>
+          <li>— 幣安主流幣監控</li>
+          <li>— 教學 + 真實交易紀錄</li>
+          <li>— 一起在市場裡活下去的群體</li>
+        </ul>
+
+        <a href="#apply" class="arrow-link">→ 申請入群 &nbsp;<em>Apply now</em></a>
+      </div>
+
+      <div class="paths-divider" aria-hidden="true"></div>
+
+      <div class="path-right" data-reveal="right">
+        <h3 class="path-name">單獨訂閱</h3>
+        <p class="path-tagline">不入群，直接用<br />按需購買，沒有綁定。</p>
+
+        <ul class="path-list">
+          <li>— 玄學日報 15U / 月</li>
+          <li>— 交易指標 100U / 3 個月</li>
+          <li>— 不需要入群</li>
+          <li>— 換回自己的交易所也能用</li>
+        </ul>
+
+        <a href="#subscribe" class="arrow-link">→ 查看工具訂閱 &nbsp;<em>Subscribe only</em></a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 6 — 路線 A
+       ============================================================ -->
+  <section class="route-a" data-reveal="up">
+    <div class="container">
+    <span class="section-number">06 &nbsp; 路線 A — 入群</span>
+    <h2 class="route-title">這不是一般的交易社群。</h2>
+
+    <div class="route-body">
+      <p>
+        你會拿到指標、玄學日報、教學、交易紀錄<br />
+        和一個一起在市場裡活下去的群體。
+      </p>
+
+      <p>
+        前兩個月免費<br />
+        之後，若你的交易持續活躍，費用的事我們再談<br />
+        若你的虧損到了某個程度，我會請你離開。
+      </p>
+
+      <p class="route-note">不是懲罰。是這個計畫需要認真的人。</p>
+
+      <div class="route-meta">
+        <p><strong>本期名額：30 人</strong></p>
+        <p>入群需要填寫申請表，我會篩選。</p>
+      </div>
+    </div>
+
+    <a href="#apply" class="arrow-link" style="margin-top: 2rem; display: inline-flex;">
+      → 申請入群 &nbsp;<em>Apply now</em>
+    </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 7 — 路線 B
+       ============================================================ -->
+  <section class="route-b" data-reveal="up">
+    <div class="container">
+    <span class="section-number">07 &nbsp; 路線 B — 單獨訂閱</span>
+
+    <div class="route-b-grid">
+      <div class="route-b-item">
+        <h3 class="route-b-name">玄學日報</h3>
+        <p class="route-b-price">15U <span>/ 月</span></p>
+        <p class="route-b-desc">
+          八字 × 紫微 × 人類圖<br />
+          每日市場能量分析<br />
+          早晚各一次
+        </p>
+        <a href="#subscribe" class="arrow-link" style="margin-top: 1.5rem; display: inline-flex;">找秋爸訂閱 →</a>
+      </div>
+
+      <div class="route-b-divider" aria-hidden="true"></div>
+
+      <div class="route-b-item">
+        <h3 class="route-b-name">交易指標</h3>
+        <p class="route-b-price">100U <span>/ 3 個月</span></p>
+        <p class="route-b-desc">
+          整合七種技術分析<br />
+          TradingView 上使用<br />
+          入群兩個月免費含在內
+        </p>
+        <a href="#subscribe" class="arrow-link" style="margin-top: 1.5rem; display: inline-flex;">聯絡訂閱 →</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 8 — 續留說明
+       ============================================================ -->
+  <section class="renewal" data-reveal="slow">
+    <div class="container">
+    <div class="renewal-inner">
+      <h2 class="renewal-title">想要繼續留下來？</h2>
+      <p class="renewal-body">
+        兩個月後，我們看你的交易狀況再說<br />
+        適合的人，歡迎一起成為同學。
+      </p>
+    </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ---- Page Hero ---- */
+  .page-hero {
+    padding: 160px 0 80px;
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    max-width: 12ch;
+    line-height: 1.1;
+    margin-top: 0.5rem;
+  }
+
+  /* ---- Full Method ---- */
+  .full-method {
+    padding: 80px 0;
+  }
+
+  .full-method-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .full-method-body p {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--text);
+  }
+
+  .method-question {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--amber);
+    margin-top: 0.5rem;
+  }
+
+  .method-invite {
+    color: var(--text-muted) !important;
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  /* ---- Fee Section ---- */
+  .fee-section {
+    padding: 80px 0;
+  }
+
+  .fee-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .fee-formula {
+    border-left: 3px solid var(--amber);
+    padding-left: 2rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .formula-main {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .formula-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+
+  .scenarios {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scenario {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(242, 237, 228, 0.06);
+  }
+
+  .scenario-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .scenario-calc {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .scenario-fee {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 0.5rem;
+  }
+
+  .scenario-fee em {
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  .scenario-insight {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ---- Leverage Compare ---- */
+  .leverage-compare {
+    padding: 80px 0;
+  }
+
+  .compare-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .compare-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 3rem;
+  }
+
+  .compare-table {
+    max-width: 560px;
+  }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(242, 237, 228, 0.06);
+  }
+
+  .compare-leverage {
+    color: var(--amber);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .compare-leverage--big {
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+
+  .compare-dots {
+    color: rgba(242, 237, 228, 0.15);
+    letter-spacing: 0.1em;
+    overflow: hidden;
+    font-size: 0.8rem;
+  }
+
+  .compare-result {
+    color: var(--text-muted);
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .compare-result--big {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .compare-gain {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .compare-note {
+    margin-top: 3rem;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .compare-note p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+
+  .compare-close {
+    margin-top: 2rem;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+  }
+
+  /* ---- Calculator ---- */
+  .calc-section {
+    padding: 80px 0;
+  }
+
+  /* ---- Two Paths ---- */
+  .two-paths {
+    padding: 100px 0;
+  }
+
+  .paths-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 3rem;
+  }
+
+  .paths-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 6vw;
+    align-items: start;
+    max-width: 860px;
+  }
+
+  .paths-divider {
+    background: var(--amber);
+    opacity: 0.25;
+    height: 300px;
+    align-self: center;
+  }
+
+  .path-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .path-tagline {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .path-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* ---- Route A ---- */
+  .route-a {
+    padding: 80px 0;
+  }
+
+  .route-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .route-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .route-body p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .route-note {
+    color: var(--text-muted) !important;
+    font-style: italic;
+  }
+
+  .route-meta {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .route-meta p {
+    color: var(--text-muted) !important;
+    font-size: 0.9rem !important;
+  }
+
+  .route-meta strong {
+    color: var(--amber);
+    font-size: 1rem;
+  }
+
+  /* ---- Route B ---- */
+  .route-b {
+    padding: 80px 0;
+  }
+
+  .route-b-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 6vw;
+    align-items: start;
+    max-width: 700px;
+    margin-top: 2rem;
+  }
+
+  .route-b-divider {
+    background: var(--amber);
+    opacity: 0.2;
+    height: 200px;
+    align-self: center;
+  }
+
+  .route-b-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .route-b-price {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+
+  .route-b-price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .route-b-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  /* ---- Renewal ---- */
+  .renewal {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 0;
+    text-align: center;
+  }
+
+  .renewal-inner {
+    max-width: 480px;
+  }
+
+  .renewal-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .renewal-body {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--text-muted);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .paths-grid,
+    .route-b-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .paths-divider,
+    .route-b-divider {
+      width: 100%;
+      height: 1px;
+      margin: 2rem 0;
+    }
+
+    .compare-row {
+      grid-template-columns: 90px 1fr auto;
+    }
+  }
+</style>
