@@ -78,7 +78,7 @@
 <style>
   .calculator-card {
     background: #0F0F1A;
-    border: 1px solid rgba(212, 137, 26, 0.2);
+    border: 1px solid var(--border);
     border-radius: 0;
     padding: 2.5rem;
     max-width: 520px;
@@ -115,8 +115,8 @@
   .form-group input[type="number"] {
     width: 100%;
     padding: 0.7rem 0.9rem;
-    background: #08080F;
-    border: 1px solid rgba(212, 137, 26, 0.2);
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: 0;
     color: var(--text);
     font-size: 0.95rem;
@@ -151,7 +151,7 @@
     -webkit-appearance: none;
     appearance: none;
     height: 2px;
-    background: rgba(212, 137, 26, 0.2);
+    background: var(--border);
     border: none;
     border-radius: 0;
     outline: none;
@@ -186,9 +186,9 @@
 
   .results-box {
     margin-top: 2rem;
-    background: #08080F;
+    background: var(--bg);
     padding: 1.5rem;
-    border: 1px solid rgba(212, 137, 26, 0.15);
+    border: 1px solid var(--border);
     border-radius: 0;
   }
 

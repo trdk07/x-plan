@@ -5,12 +5,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
 :root {
-  --bg: #08080F;
-  --amber: #D4891A;
-  --blue: #3D6B8A;
+  --bg: #0C1510;
+  --bg-card: #131E14;
+  --border: #1E2E1F;
+  --amber: #C4A84A;
+  --blue: #4A7A6A;
   --red: #8B2020;
-  --text: #F2EDE4;
-  --text-muted: rgba(242, 237, 228, 0.5);
+  --text: #E8E4D8;
+  --text-muted: #7A8A72;
   --font-display: 'Inter', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --transition: 0.8s var(--ease-out);
@@ -112,7 +114,7 @@ nav {
 }
 
 nav.scrolled {
-  background: rgba(8, 8, 15, 0.92);
+  background: rgba(12, 21, 16, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -187,7 +189,7 @@ nav.scrolled {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(8, 8, 15, 0.98);
+    background: rgba(12, 21, 16, 0.98);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -210,7 +212,7 @@ nav.scrolled {
 
 footer {
   padding: 60px 0;
-  border-top: 1px solid rgba(242, 237, 228, 0.06);
+  border-top: 1px solid var(--border);
 }
 
 footer .container {
@@ -288,7 +290,7 @@ footer .container {
 }
 
 .btn-ghost {
-  border: 1px solid rgba(242, 237, 228, 0.2);
+  border: 1px solid var(--border);
   color: var(--text-muted);
   background: transparent;
 }

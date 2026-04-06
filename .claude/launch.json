@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "/Users/trdk/.nvm/versions/node/v20.20.1/bin/node",
+      "runtimeArgs": ["/Users/trdk/.nvm/versions/node/v20.20.1/bin/npm", "run", "dev", "--", "--port", "4321"],
+      "port": 4321
+    }
+  ]
+}
