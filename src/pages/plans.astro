@@ -69,28 +69,64 @@ import Calculator from '../components/Calculator.astro';
       <p class="formula-note">（不是你的本金，是你撬動的總部位）</p>
     </div>
 
-    <div class="scenarios">
-      <div class="scenario">
-        <span class="scenario-label">情境 A — 10 倍槓桿 / 100U 本金</span>
-        <p class="scenario-calc">100U × 10 = 1,000U 部位 → Taker 0.06%</p>
-        <p class="scenario-fee">手續費：0.60 USDT <em>（單邊）</em></p>
-        <p class="scenario-insight">來回一次約 1.2U，佔本金 1.2%</p>
+    <div class="fee-exchanges">
+      <div class="fee-exchange-col">
+        <h3 class="fee-exchange-name">BitMart</h3>
+        <p class="fee-exchange-rate">Maker 0.02% / Taker 0.06%　·　最高 200×</p>
+
+        <div class="scenarios">
+          <div class="scenario">
+            <span class="scenario-label">10× 槓桿 / 100U 本金</span>
+            <p class="scenario-calc">1,000U 部位 → Taker 0.06%</p>
+            <p class="scenario-fee">0.60 USDT <em>（單邊）</em></p>
+            <p class="scenario-insight">來回 1.2U，佔本金 1.2%</p>
+          </div>
+          <div class="scenario">
+            <span class="scenario-label">50× 槓桿 / 100U 本金</span>
+            <p class="scenario-calc">5,000U 部位 → Taker 0.06%</p>
+            <p class="scenario-fee">3.00 USDT <em>（單邊）</em></p>
+            <p class="scenario-insight">來回 6U，佔本金 6%</p>
+          </div>
+          <div class="scenario">
+            <span class="scenario-label">200× 槓桿 / 100U 本金</span>
+            <p class="scenario-calc">20,000U 部位 → Taker 0.06%</p>
+            <p class="scenario-fee">12.00 USDT <em>（單邊）</em></p>
+            <p class="scenario-insight">來回 24U，佔本金 24%</p>
+          </div>
+        </div>
       </div>
 
-      <div class="scenario">
-        <span class="scenario-label">情境 B — 50 倍槓桿 / 100U 本金</span>
-        <p class="scenario-calc">100U × 50 = 5,000U 部位 → Taker 0.06%</p>
-        <p class="scenario-fee">手續費：3.00 USDT <em>（單邊）</em></p>
-        <p class="scenario-insight">來回一次約 6U，佔本金 6%——每筆必須有明確利潤</p>
-      </div>
+      <div class="fee-exchange-col">
+        <h3 class="fee-exchange-name">MEXC</h3>
+        <p class="fee-exchange-rate">統一費率 0.04%　·　最高 500×</p>
 
-      <div class="scenario">
-        <span class="scenario-label">情境 C — 200 倍槓桿 / 100U 本金</span>
-        <p class="scenario-calc">100U × 200 = 20,000U 部位 → Taker 0.06%</p>
-        <p class="scenario-fee">手續費：12.00 USDT <em>（單邊）</em></p>
-        <p class="scenario-insight">高槓桿的代價。這就是為什麼進場點必須精準。</p>
+        <div class="scenarios">
+          <div class="scenario">
+            <span class="scenario-label">10× 槓桿 / 100U 本金</span>
+            <p class="scenario-calc">1,000U 部位 → 0.04%</p>
+            <p class="scenario-fee">0.40 USDT <em>（單邊）</em></p>
+            <p class="scenario-insight">來回 0.8U，佔本金 0.8%</p>
+          </div>
+          <div class="scenario">
+            <span class="scenario-label">200× 槓桿 / 100U 本金</span>
+            <p class="scenario-calc">20,000U 部位 → 0.04%</p>
+            <p class="scenario-fee">8.00 USDT <em>（單邊）</em></p>
+            <p class="scenario-insight">來回 16U，佔本金 16%——比 BitMart 省 8U</p>
+          </div>
+          <div class="scenario">
+            <span class="scenario-label">500× 槓桿 / 100U 本金</span>
+            <p class="scenario-calc">50,000U 部位 → 0.04%</p>
+            <p class="scenario-fee">20.00 USDT <em>（單邊）</em></p>
+            <p class="scenario-insight">來回 40U——極致資金效率，但紀律是前提</p>
+          </div>
+        </div>
       </div>
     </div>
+
+    <p class="fee-takeaway" data-reveal="fade">
+      同樣的倉位，MEXC 的 Taker 成本比 BitMart 低 33%。<br />
+      而且 Maker 掛單也是 0.04%——市價逃命不會被多收。
+    </p>
     </div>
   </section>
 
@@ -100,24 +136,33 @@ import Calculator from '../components/Calculator.astro';
   <section class="leverage-compare" data-reveal="up">
     <div class="container">
     <span class="section-number">03</span>
-    <h2 class="compare-title">200 倍是什麼感覺？</h2>
-    <p class="compare-subtitle">同樣 100U 本金，不同槓桿，你控制的部位完全不同。</p>
+    <h2 class="compare-title">同樣 100U，你撬動多少？</h2>
+    <p class="compare-subtitle">不同交易所、不同槓桿，控制的部位完全不同。</p>
 
     <div class="compare-table" data-stagger>
       <div class="compare-row" data-reveal="up">
-        <span class="compare-leverage">10 倍</span>
+        <span class="compare-leverage">10×</span>
         <span class="compare-dots">··················</span>
-        <span class="compare-result">1,000U <em class="compare-gain">（+5%）</em></span>
+        <span class="compare-result">1,000U</span>
+        <span class="compare-exchange">BMA · MEXC</span>
       </div>
       <div class="compare-row" data-reveal="up">
-        <span class="compare-leverage">50 倍</span>
+        <span class="compare-leverage">50×</span>
         <span class="compare-dots">··················</span>
-        <span class="compare-result">5,000U <em class="compare-gain">（+25%）</em></span>
+        <span class="compare-result">5,000U</span>
+        <span class="compare-exchange">BMA · MEXC</span>
       </div>
       <div class="compare-row compare-row--big" data-reveal="up">
-        <span class="compare-leverage compare-leverage--big">200 倍</span>
+        <span class="compare-leverage compare-leverage--big">200×</span>
         <span class="compare-dots">··················</span>
-        <span class="compare-result compare-result--big">20,000U <em class="compare-gain">（+100%）</em></span>
+        <span class="compare-result compare-result--big">20,000U</span>
+        <span class="compare-exchange">BMA 最高 · MEXC</span>
+      </div>
+      <div class="compare-row compare-row--big" data-reveal="up">
+        <span class="compare-leverage compare-leverage--big" style="color: var(--text);">500×</span>
+        <span class="compare-dots">··················</span>
+        <span class="compare-result compare-result--big">50,000U</span>
+        <span class="compare-exchange" style="color: var(--amber);">MEXC 限定</span>
       </div>
     </div>
 
@@ -160,12 +205,12 @@ import Calculator from '../components/Calculator.astro';
         <ul class="path-list">
           <li>— 交易指標（兩個月免費）</li>
           <li>— 玄學日報</li>
-          <li>— 幣安主流幣監控</li>
+          <li>— Binance × Bitget 監控</li>
           <li>— 教學 + 真實交易紀錄</li>
           <li>— 一起在市場裡活下去的群體</li>
         </ul>
 
-        <span class="arrow-link" style="opacity: 0.5; cursor: default;">→ 申請入群 &nbsp;<em>Apply now</em></span>
+        <a href="https://tally.so/r/RGYNNl" target="_blank" rel="noopener" class="arrow-link">→ 申請入群 &nbsp;<em>Apply now</em></a>
       </div>
 
       <div class="paths-divider" aria-hidden="true"></div>
@@ -181,7 +226,7 @@ import Calculator from '../components/Calculator.astro';
           <li>— 換回自己的交易所也能用</li>
         </ul>
 
-        <a href="#subscribe" class="arrow-link">→ 查看工具訂閱 &nbsp;<em>Subscribe only</em></a>
+        <a href="/tools" class="arrow-link">→ 查看工具訂閱 &nbsp;<em>Subscribe only</em></a>
       </div>
     </div>
     </div>
@@ -215,9 +260,9 @@ import Calculator from '../components/Calculator.astro';
       </div>
     </div>
 
-    <span class="arrow-link" style="margin-top: 2rem; display: inline-flex; opacity: 0.5; cursor: default;">
+    <a href="https://tally.so/r/RGYNNl" target="_blank" rel="noopener" class="arrow-link" style="margin-top: 2rem; display: inline-flex;">
       → 申請入群 &nbsp;<em>Apply now</em>
-    </span>
+    </a>
     </div>
   </section>
 
@@ -346,6 +391,46 @@ import Calculator from '../components/Calculator.astro';
     margin-top: 0.5rem;
   }
 
+  .fee-exchanges {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .fee-exchange-col {
+    background: var(--bg-card);
+    padding: 2rem;
+  }
+
+  .fee-exchange-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .fee-exchange-rate {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .fee-takeaway {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+
+  .compare-exchange {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
   .scenarios {
     display: flex;
     flex-direction: column;
@@ -415,7 +500,7 @@ import Calculator from '../components/Calculator.astro';
 
   .compare-row {
     display: grid;
-    grid-template-columns: 100px 1fr auto;
+    grid-template-columns: 80px 1fr auto auto;
     gap: 0.5rem 1.5rem;
     align-items: baseline;
     padding: 1rem 0;
@@ -665,8 +750,16 @@ import Calculator from '../components/Calculator.astro';
       margin: 2rem 0;
     }
 
+    .fee-exchanges {
+      grid-template-columns: 1fr;
+    }
+
     .compare-row {
-      grid-template-columns: 90px 1fr auto;
+      grid-template-columns: 70px 1fr auto;
+    }
+
+    .compare-exchange {
+      display: none;
     }
   }
 </style>

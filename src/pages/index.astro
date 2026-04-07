@@ -76,6 +76,11 @@ import SplashCrystal from '../components/SplashCrystal.astro';
           <span class="trading-arrow">→</span>
           <span class="trading-position trading-position--highlight">20,000U 的部位</span>
         </div>
+        <div class="trading-row trading-row--highlight" data-reveal="up">
+          <span class="trading-leverage trading-leverage--big">500×</span>
+          <span class="trading-arrow">→</span>
+          <span class="trading-position trading-position--highlight">50,000U 的部位</span>
+        </div>
       </div>
     </div>
     </div>
@@ -94,10 +99,10 @@ import SplashCrystal from '../components/SplashCrystal.astro';
         <span class="stat-context">篩選制，不開放候補</span>
       </div>
       <div class="stat-block" data-reveal="up">
-        <span class="stat-number" data-count="200">0</span>
+        <span class="stat-number" data-count="500">0</span>
         <span class="stat-unit">×</span>
-        <span class="stat-label">全倉槓桿倍數</span>
-        <span class="stat-context">配合 1–3 分鐘圖，不過夜</span>
+        <span class="stat-label">最高槓桿倍數</span>
+        <span class="stat-context">MEXC 500× / BitMart 200×</span>
       </div>
       <div class="stat-block" data-reveal="up">
         <span class="stat-number" data-count="60">0</span>
@@ -193,7 +198,7 @@ import SplashCrystal from '../components/SplashCrystal.astro';
             <span class="exchange-tag">短線主場</span>
           </div>
           <ul class="exchange-features">
-            <li>合約 Maker 手續費 0%，Taker 低至 0.01%</li>
+            <li>合約 Maker 0%（活動期間）/ Taker 0.01%–0.04%</li>
             <li>最高 500× 槓桿，極致資金效率</li>
             <li>ether.fi 聯名 Visa 卡：日常 3% / 旅遊 5% 返現，零海外手續費</li>
             <li>3,000+ 幣種，新幣首發上架</li>
