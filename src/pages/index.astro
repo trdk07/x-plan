@@ -14,31 +14,56 @@ import SplashCrystal from '../components/SplashCrystal.astro';
        ============================================================ -->
   <section class="hero">
     <div class="container">
-    <div class="hero-inner">
-      <span class="hero-rule" data-hero></span>
+    <div class="hero-layout">
+      <div class="hero-inner">
+        <span class="hero-rule" data-hero></span>
 
-      <h1 class="hero-headline" data-hero>
-        <span class="word-reveal">While</span>
-        <span class="word-reveal">they</span>
-        <span class="word-reveal">hold,</span><br />
-        <span class="word-reveal">we</span>
-        <span class="word-reveal" style="color: var(--amber)">flip.</span>
-      </h1>
+        <h1 class="hero-headline" data-hero>
+          <span class="word-reveal">While</span>
+          <span class="word-reveal">they</span>
+          <span class="word-reveal">hold,</span><br />
+          <span class="word-reveal">we</span>
+          <span class="word-reveal" style="color: var(--amber)">flip.</span>
+        </h1>
 
-      <p class="hero-chinese" data-hero>
-        視野放小，不是退步<br />
-        是另一片藍海。
-      </p>
+        <p class="hero-chinese" data-hero>
+          視野放小，不是退步<br />
+          是另一片藍海。
+        </p>
 
-      <p class="hero-english" data-hero>
-        Short frame. Clear mind. Better sleep.
-      </p>
+        <p class="hero-english" data-hero>
+          Short frame. Clear mind. Better sleep.
+        </p>
 
-      <a href="https://tally.so/r/RGYNNl" target="_blank" rel="noopener" class="btn btn-amber hero-cta" data-hero>申請入群</a>
+        <a href="https://tally.so/r/RGYNNl" target="_blank" rel="noopener" class="btn btn-amber hero-cta" data-hero>申請入群</a>
 
-      <p class="hero-sub" data-hero>
-        一個給短線交易者的社群。玄學流日 × 技術分析 × 真實交易紀錄。
-      </p>
+        <p class="hero-sub" data-hero>
+          一個給短線交易者的社群。玄學流日 × 技術分析 × 真實交易紀錄。
+        </p>
+      </div>
+
+      <div class="hero-card" data-hero>
+        <span class="hero-card-label">/ 核心思路</span>
+        <h3 class="hero-card-title">不是預測行情<br />是管理每一筆交易</h3>
+        <p class="hero-card-desc">
+          進場有邏輯、出場有紀律<br />
+          用最小的時間框架，換最大的確定性
+        </p>
+        <div class="hero-card-stats">
+          <div class="hero-card-stat">
+            <span class="hero-card-stat-num">1–3</span>
+            <span class="hero-card-stat-unit">分鐘圖</span>
+          </div>
+          <div class="hero-card-stat">
+            <span class="hero-card-stat-num">全倉</span>
+            <span class="hero-card-stat-unit">槓桿模式</span>
+          </div>
+          <div class="hero-card-stat">
+            <span class="hero-card-stat-num">短進短出</span>
+            <span class="hero-card-stat-unit">不留倉過夜</span>
+          </div>
+        </div>
+      </div>
     </div>
     </div>
   </section>
@@ -99,10 +124,16 @@ import SplashCrystal from '../components/SplashCrystal.astro';
         <span class="stat-context">篩選制，不開放候補</span>
       </div>
       <div class="stat-block" data-reveal="up">
+        <span class="stat-number" data-count="200">0</span>
+        <span class="stat-unit">×</span>
+        <span class="stat-label">BitMart 槓桿</span>
+        <span class="stat-context">精算流，Maker 費率最低</span>
+      </div>
+      <div class="stat-block" data-reveal="up">
         <span class="stat-number" data-count="500">0</span>
         <span class="stat-unit">×</span>
-        <span class="stat-label">最高槓桿倍數</span>
-        <span class="stat-context">MEXC 500× / BitMart 200×</span>
+        <span class="stat-label">MEXC 槓桿</span>
+        <span class="stat-context">極致資金效率，短線主場</span>
       </div>
       <div class="stat-block" data-reveal="up">
         <span class="stat-number" data-count="60">0</span>
@@ -119,7 +150,7 @@ import SplashCrystal from '../components/SplashCrystal.astro';
        ============================================================ -->
   <section class="arsenal">
     <div class="container">
-    <span class="section-label" data-reveal="fade">02 &nbsp; 武器庫</span>
+    <span class="section-label" data-reveal="fade">02 &nbsp; 什麼有利於你</span>
     <h2 class="arsenal-title" data-reveal="up">加入後，你拿到這些。</h2>
 
     <div class="arsenal-grid" data-stagger>
@@ -172,11 +203,34 @@ import SplashCrystal from '../components/SplashCrystal.astro';
         <p>30 人小群<br />不喊單，討論打法</p>
       </div>
 
+      <div class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon arsenal-icon--svg">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 螢幕 -->
+            <rect x="3" y="4" width="22" height="14" rx="2" stroke="var(--amber)" stroke-width="1.2" fill="none"/>
+            <!-- 底座 -->
+            <line x1="10" y1="18" x2="18" y2="18" stroke="var(--amber)" stroke-width="1.2"/>
+            <line x1="9" y1="21" x2="19" y2="21" stroke="var(--amber)" stroke-width="1.2"/>
+            <line x1="12" y1="18" x2="11" y2="21" stroke="var(--amber)" stroke-width="1"/>
+            <line x1="16" y1="18" x2="17" y2="21" stroke="var(--amber)" stroke-width="1"/>
+            <!-- 直播圓點 -->
+            <circle cx="14" cy="10" r="2.5" fill="var(--amber)" opacity="0.9"/>
+            <!-- 訊號波紋 -->
+            <path d="M10 7.5a5.5 5.5 0 0 1 0 5" stroke="var(--amber)" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <path d="M18 7.5a5.5 5.5 0 0 0 0 5" stroke="var(--amber)" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <path d="M8 6a8 8 0 0 1 0 8" stroke="var(--amber)" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.3"/>
+            <path d="M20 6a8 8 0 0 0 0 8" stroke="var(--amber)" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.3"/>
+          </svg>
+        </span>
+        <h3>不定時線上直播 / 1v1 教學</h3>
+        <p>實盤操作解說<br />一對一問題解答</p>
+      </div>
+
     </div>
 
     <!-- 交易所推薦 -->
     <div class="exchange-section" data-reveal="up">
-      <h3 class="exchange-heading">交易所精選</h3>
+      <h3 class="exchange-heading">不是最好的交易所，但是合適於這樣的思路</h3>
       <div class="exchange-grid">
 
         <div class="exchange-card">
@@ -247,21 +301,61 @@ import SplashCrystal from '../components/SplashCrystal.astro';
   </section>
 
   <!-- ============================================================
-       Section 6 — CTA
+       Section 6 — FAQ
+       ============================================================ -->
+  <section class="faq-section">
+    <div class="container">
+    <span class="section-label" data-reveal="fade">04 &nbsp; 常見問題</span>
+    <h2 class="faq-title" data-reveal="up">你可能會問的。</h2>
+
+    <div class="faq-list" data-stagger>
+
+      <details class="faq-item" data-reveal="up">
+        <summary>高槓桿不是賭博嗎？</summary>
+        <p>沒有紀律的高槓桿是賭博<br />有進場邏輯、有停損、有出場計畫的高槓桿，是工具</p>
+      </details>
+
+      <details class="faq-item" data-reveal="up">
+        <summary>兩個月後怎麼收費？</summary>
+        <p>如果你持續在場、保持紀律<br />費用的事我會再好好思考<br />畢竟我自己賺真的比較快</p>
+      </details>
+
+      <details class="faq-item" data-reveal="up">
+        <summary>我是新手，可以加入嗎？</summary>
+        <p>可以，但你要有心理準備<br />這不是從零開始教你什麼是 K 線的地方<br />只是我會建議你先去上課</p>
+      </details>
+
+      <details class="faq-item" data-reveal="up">
+        <summary>為什麼一定要用你的邀請碼註冊？</summary>
+        <p>因為我們使用的工具才有辦法對齊<br />但你堅持使用自己習慣的平台，也可以考慮訂閱制<br />但我不會對你的盈虧負責</p>
+      </details>
+
+      <details class="faq-item" data-reveal="up">
+        <summary>虧損到什麼程度會被請離開？</summary>
+        <p>沒有固定數字<br />當我判斷你的心態已經失控、交易變成情緒操作的時候<br />我會跟你談</p>
+      </details>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 7 — CTA
        ============================================================ -->
   <section class="cta-section">
     <div class="cta-inner" data-reveal="up">
-      <h2 class="cta-title">本期限收 30 人。</h2>
+      <h2 class="cta-title">本期限收 30 人</h2>
 
       <div class="cta-body">
-        <p>免費開始，但不是人人都能留下來。</p>
         <p>
-          如果你的虧損到了某個程度<br />
-          我會請你離開。
+          前兩個月免費<br />
+          之後，只要你保持交易紀律、穩定留在市場裡<br />
+          費用的事我們再談
         </p>
         <p>
-          不是懲罰，而是我的方式可能真的不適合你<br />
-          這是沒關係的，一定有更適合你的交易計畫
+          如果你的虧損失去控制，我會請你離開<br />
+          這不是懲罰<br />
+          保護你的生活，永遠比任何一筆交易更重要
         </p>
       </div>
 
@@ -314,7 +408,19 @@ import SplashCrystal from '../components/SplashCrystal.astro';
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           el.textContent = String(Math.round(target * eased));
-          if (progress < 1) requestAnimationFrame(tick);
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            // Bounce effect on completion
+            el.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            el.style.transform = 'scale(1.15)';
+            setTimeout(() => {
+              el.style.transform = 'scale(1)';
+            }, 300);
+            // Underline highlight
+            const parent = el.closest('.stat-block');
+            if (parent) parent.classList.add('stat-block--done');
+          }
         }
         requestAnimationFrame(tick);
         countObserver.unobserve(el);
@@ -323,6 +429,17 @@ import SplashCrystal from '../components/SplashCrystal.astro';
 
     document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
   }
+
+  // Mobile touch interaction for arsenal cards
+  document.querySelectorAll('.arsenal-card').forEach((card: HTMLElement) => {
+    card.addEventListener('touchstart', () => {
+      // Remove active from all other cards
+      document.querySelectorAll('.arsenal-card').forEach((c: HTMLElement) => {
+        if (c !== card) c.classList.remove('arsenal-card--active');
+      });
+      card.classList.toggle('arsenal-card--active');
+    }, { passive: true });
+  });
 
   if (document.getElementById('splash')) {
     document.addEventListener('splash-exited', () => {
@@ -340,7 +457,7 @@ import SplashCrystal from '../components/SplashCrystal.astro';
 <style>
   /* ---- Hero ---- */
   .hero {
-    height: 100vh;
+    min-height: 100vh;
     background: var(--bg);
     background-image: radial-gradient(ellipse 80% 60% at 85% 85%, rgba(196, 168, 74, 0.08) 0%, transparent 70%);
     display: flex;
@@ -351,11 +468,76 @@ import SplashCrystal from '../components/SplashCrystal.astro';
 
   .hero .container { width: 100%; }
 
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 4rem;
+    align-items: center;
+  }
+
   .hero-inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     max-width: 820px;
+  }
+
+  /* ---- Hero Card ---- */
+  .hero-card {
+    background: rgba(196, 168, 74, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
+  .hero-card-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .hero-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .hero-card-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-card-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-card-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-card-stat-num {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--amber);
+  }
+
+  .hero-card-stat-unit {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
   }
 
   .hero-rule {
@@ -492,7 +674,7 @@ import SplashCrystal from '../components/SplashCrystal.astro';
 
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1px;
   }
 
@@ -586,8 +768,19 @@ import SplashCrystal from '../components/SplashCrystal.astro';
     opacity: 1;
   }
 
-  .arsenal-card:hover .arsenal-icon {
+  .arsenal-card:hover .arsenal-icon,
+  .arsenal-card--active .arsenal-icon {
     transform: scale(1.1);
+  }
+
+  .arsenal-card--active {
+    background: #1a2a1c;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(196, 168, 74, 0.1);
+  }
+
+  .arsenal-card--active::after {
+    opacity: 1;
   }
 
   .arsenal-icon {
@@ -730,6 +923,84 @@ import SplashCrystal from '../components/SplashCrystal.astro';
     pointer-events: none;
   }
 
+  /* ---- Stat bounce ---- */
+  .stat-block--done .stat-number::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--amber);
+    margin: 0.5rem auto 0;
+    animation: stat-line 0.4s ease-out forwards;
+  }
+
+  @keyframes stat-line {
+    from { width: 0; opacity: 0; }
+    to { width: 24px; opacity: 1; }
+  }
+
+  /* ---- FAQ ---- */
+  .faq-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 3rem;
+  }
+
+  .faq-list {
+    max-width: 720px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item summary {
+    padding: 1.25rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: var(--amber);
+    font-weight: 300;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-item summary:hover {
+    color: var(--amber);
+  }
+
+  .faq-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    padding: 0 0 1.25rem;
+  }
+
   /* ---- 爭議說明 ---- */
   .dispute {
     padding: 120px 0;
@@ -819,14 +1090,29 @@ import SplashCrystal from '../components/SplashCrystal.astro';
 
   /* ---- Mobile ---- */
   @media (max-width: 768px) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .hero-card {
+      order: 2;
+    }
+
     .trading-grid {
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }
 
     .stats-grid {
-      grid-template-columns: 1fr;
-      gap: 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .stat-block {
+      background: var(--bg);
     }
 
     .stat-block {

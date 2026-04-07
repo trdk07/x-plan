@@ -122,9 +122,14 @@ import Layout from '../layouts/Layout.astro';
 
       <p class="rebate-english">The option is always there.</p>
 
-      <a href="#register" class="arrow-link" style="margin-top: 2rem; display: inline-flex;">
-        使用邀請碼註冊 →
-      </a>
+      <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem;">
+        <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
+          → BitMart 邀請碼註冊
+        </a>
+        <a href="https://promote.mexc.com/a/pM06womH" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
+          → MEXC 邀請碼註冊
+        </a>
+      </div>
     </div>
     </div>
   </section>
@@ -187,11 +192,74 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- ============================================================
+       Tool 5 — MEXC × ether.fi Card (odd)
+       ============================================================ -->
+  <section class="tool-section tool-odd tool-mexc-card">
+    <div class="container tool-grid">
+    <div class="tool-text" data-reveal="left">
+      <span class="section-number">05</span>
+      <h2 class="tool-name">MEXC × ether.fi 聯名信用卡</h2>
+      <p class="tool-desc">
+        專為高頻玩家打造的返現神卡<br />
+        與 ether.fi 合作推出的高階 Visa 虛擬信用卡<br />
+        福利結構非常直接，完全瞄準行動支付習慣。
+      </p>
+
+      <p class="tool-desc">
+        Apple Pay / Google Pay 無縫綁定<br />
+        申請過件後直接綁進手機錢包<br />
+        全球能刷卡的終端機都能用加密資產結帳。
+      </p>
+
+      <div class="cashback-table">
+        <div class="cashback-row">
+          <span class="cashback-label">日常消費（咖啡、吃飯、搭車）</span>
+          <span class="cashback-rate">3%</span>
+        </div>
+        <div class="cashback-row">
+          <span class="cashback-label">旅遊消費（機票、飯店預訂）</span>
+          <span class="cashback-rate">5%</span>
+        </div>
+        <div class="cashback-row">
+          <span class="cashback-label">海外刷卡手續費</span>
+          <span class="cashback-rate">0%</span>
+        </div>
+      </div>
+
+      <p class="cashback-meta">
+        免除國際交易手續費——<br />
+        常買國外網購、訂閱 Netflix / Spotify 的人<br />
+        <em>省下的 1.5% 海外手續費，長期算下來很可觀。</em>
+      </p>
+
+      <p class="cashback-close">打單賺錢，刷卡也在賺。兩張卡，兩種場景。</p>
+      <p class="cashback-english">Two cards. Two ecosystems. One method.</p>
+
+      <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+        <a href="https://www.mexc.com/zh-TW/learn/article/how-to-apply-for-the-mexc-%C3%97-ether-fi-credit-card/1" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
+          → 了解 MEXC × ether.fi Card
+        </a>
+        <a href="https://promote.mexc.com/a/pM06womH" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
+          → 邀請碼註冊
+        </a>
+      </div>
+    </div>
+
+    <div class="tool-image" data-reveal="right">
+      <div class="mexc-card-placeholder">
+        <span class="mexc-card-logo">MEXC × ether.fi</span>
+        <span class="mexc-card-type">Visa Credit Card</span>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        Section — 手續費試算器
        ============================================================ -->
   <section class="calc-section">
     <div class="container">
-      <span class="section-number">05</span>
+      <span class="section-number">06</span>
       <h2 class="calc-main-title">手續費試算器</h2>
       <p class="calc-main-desc">開倉前先算清楚成本，這是紀律的一部分。</p>
 
@@ -583,6 +651,35 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 0.08em;
     color: var(--amber);
     margin-top: 0.5rem;
+  }
+
+  /* ---- MEXC Card Placeholder ---- */
+  .mexc-card-placeholder {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border: 1px solid rgba(196, 168, 74, 0.2);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 260px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .mexc-card-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .mexc-card-type {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
   }
 
   /* ---- 試算器 ---- */

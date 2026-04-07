@@ -1,10 +1,141 @@
 ---
-// Footer.astro — Minimal shared footer
+// Footer.astro — Info banner + minimal footer
 ---
 
 <footer>
-  <div class="container">
-    <span class="footer-brand">X翻倉計畫</span>
-    <span class="footer-copy">© 2025 &nbsp;·&nbsp; 高槓桿高風險，交易需謹慎。</span>
+  <div class="footer-banner">
+    <div class="container">
+      <div class="footer-info-grid">
+
+        <div class="footer-info-block">
+          <span class="footer-info-label">社群類型</span>
+          <span class="footer-info-value">短線合約交易社群</span>
+        </div>
+
+        <div class="footer-info-block">
+          <span class="footer-info-label">使用交易所</span>
+          <span class="footer-info-value">BitMart · MEXC</span>
+        </div>
+
+        <div class="footer-info-block">
+          <span class="footer-info-label">本期名額</span>
+          <span class="footer-info-value footer-info-value--status">
+            <span class="footer-dot footer-dot--orange"></span>
+            30 人（篩選制）
+          </span>
+        </div>
+
+        <div class="footer-info-block">
+          <span class="footer-info-label">目前狀態</span>
+          <span class="footer-info-value footer-info-value--status">
+            <span class="footer-dot footer-dot--green"></span>
+            開放申請中
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <span class="footer-brand">X翻倉計畫 · 短線交易社群</span>
+      <span class="footer-copy">© 2026 All rights reserved · 高槓桿高風險，交易需謹慎</span>
+    </div>
   </div>
 </footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-banner {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .footer-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .footer-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-info-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .footer-info-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .footer-info-value--status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .footer-dot--orange {
+    background: #E8943A;
+  }
+
+  .footer-dot--green {
+    background: #4ADE80;
+  }
+
+  .footer-bottom {
+    padding: 1.5rem 0;
+  }
+
+  .footer-bottom .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    color: var(--amber);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-copy {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-info-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-info-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>

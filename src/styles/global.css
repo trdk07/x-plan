@@ -185,55 +185,42 @@ nav.scrolled {
   .nav-links {
     display: none;
     position: fixed;
-    top: 0;
+    top: 56px;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: rgba(12, 21, 16, 0.98);
+    background: rgba(12, 21, 16, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
+    align-items: flex-start;
+    gap: 0;
     z-index: 99;
+    padding: 0.75rem 8vw 1rem;
+    border-bottom: 1px solid var(--border);
   }
 
   .nav-links.open {
     display: flex;
   }
 
+  .nav-links li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-links li:last-child {
+    border-bottom: none;
+    padding-top: 0.5rem;
+  }
+
   .nav-links a {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.75rem 0;
   }
 }
 
-/* ============================================================
-   Footer
-   ============================================================ */
-
-footer {
-  padding: 60px 0;
-  border-top: 1px solid var(--border);
-}
-
-footer .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer-brand {
-  color: var(--amber);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.footer-copy {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
+/* Footer styles moved to Footer.astro component */
 
 /* ============================================================
    Container — 版面置中

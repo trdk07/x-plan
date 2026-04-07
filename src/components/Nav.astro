@@ -12,8 +12,96 @@
   </button>
 
   <ul class="nav-links">
+    <li><a href="/">首頁</a></li>
     <li><a href="/plans">方案</a></li>
     <li><a href="/tools">工具</a></li>
     <li><a href="https://tally.so/r/RGYNNl" target="_blank" rel="noopener" class="nav-cta">申請入群</a></li>
   </ul>
+
+  <div class="nav-extras">
+    <a href="https://www.threads.com/@xia.tour" target="_blank" rel="noopener" class="nav-icon" aria-label="Threads">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.678 1.29 2.86 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.34-.776-.94-1.407-1.727-1.846.07 2.898-.982 5.13-3.138 5.13-.89 0-1.69-.345-2.244-.97-.515-.58-.755-1.344-.688-2.187.127-1.615 1.394-2.9 3.324-3.38.73-.18 1.473-.238 2.19-.18-.258-1.306-.974-2.034-2.084-2.034-.814 0-1.548.39-2.132 1.134l-1.592-1.168c.864-1.1 2.085-1.727 3.453-1.727 1.263 0 2.347.48 3.128 1.394.727.85 1.145 2.029 1.234 3.44a7.7 7.7 0 011.065.839c1.137 1.04 1.9 2.466 2.21 4.124.356 1.905.07 4.155-1.678 5.905C17.91 23.237 15.498 23.978 12.186 24zm2.768-8.032c-.588 0-1.236.106-1.878.303-1.197.3-1.95.962-2.017 1.778-.037.454.087.832.36 1.14.301.338.749.525 1.247.525 1.088 0 2.288-1.07 2.288-3.746z" fill="currentColor"/>
+      </svg>
+    </a>
+    <div class="nav-status">
+      <span class="nav-status-dot"></span>
+      <span class="nav-status-text">翻倉中</span>
+    </div>
+  </div>
 </nav>
+
+<style>
+  .nav-extras {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-icon {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    transition: color 0.3s;
+  }
+
+  .nav-icon:hover {
+    color: var(--text);
+  }
+
+  .nav-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .nav-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ADE80;
+    animation: breathe 2s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 1; box-shadow: 0 0 4px #4ADE80; }
+    50% { opacity: 0.4; box-shadow: 0 0 8px #4ADE80, 0 0 16px rgba(74, 222, 128, 0.3); }
+  }
+
+  .nav-status-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #4ADE80;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 768px) {
+    .nav-extras {
+      position: fixed;
+      top: 16px;
+      right: 52px;
+      z-index: 101;
+      gap: 0.75rem;
+    }
+
+    .nav-status {
+      padding-left: 0.75rem;
+    }
+
+    .nav-status-text {
+      font-size: 0.7rem;
+    }
+
+    .nav-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+</style>

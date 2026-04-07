@@ -131,6 +131,95 @@ import Calculator from '../components/Calculator.astro';
   </section>
 
   <!-- ============================================================
+       Section 2.5 — 回本點距白話解說
+       ============================================================ -->
+  <section class="breakeven-section">
+    <div class="container">
+    <h2 class="breakeven-title" data-reveal="up">白話講：漲幾點才開始賺？</h2>
+    <p class="breakeven-intro" data-reveal="fade">
+      手續費不是一個數字而已——它決定了你開倉後，<br />
+      幣價要往你的方向跑多遠，你才開始真正賺錢。
+    </p>
+
+    <div class="breakeven-cases" data-stagger>
+
+      <!-- ETH 案例 -->
+      <div class="breakeven-case" data-reveal="up">
+        <span class="breakeven-case-label">案例一 — ETH 進場價 3,000 U</span>
+        <p class="breakeven-case-desc">假設你在 3,000U 做多，ETH 要漲到多少才回本？</p>
+
+        <div class="breakeven-compare">
+          <div class="breakeven-col">
+            <h4>BitMart</h4>
+            <div class="breakeven-item">
+              <span class="breakeven-type">全掛單（Maker 進出）</span>
+              <span class="breakeven-rate">總費率 0.04%</span>
+              <p class="breakeven-math">3,000 × 0.04% = <strong>1.2 點</strong></p>
+              <p class="breakeven-result">ETH 漲到 3,001.2 就打平<br />之後每跳 1 點都是純利潤</p>
+            </div>
+            <div class="breakeven-item">
+              <span class="breakeven-type">全市價（Taker 進出）</span>
+              <span class="breakeven-rate">總費率 0.12%</span>
+              <p class="breakeven-math">3,000 × 0.12% = <strong>3.6 點</strong></p>
+              <p class="breakeven-result">需要漲到 3,003.6 才回本</p>
+            </div>
+          </div>
+          <div class="breakeven-col">
+            <h4>MEXC</h4>
+            <div class="breakeven-item">
+              <span class="breakeven-type">不管掛單或市價</span>
+              <span class="breakeven-rate">統一費率 0.08%</span>
+              <p class="breakeven-math">3,000 × 0.08% = <strong>2.4 點</strong></p>
+              <p class="breakeven-result">漲過 3,002.4 就開始賺<br />不用擔心掛單沒成交被吃 Taker</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BTC 案例 -->
+      <div class="breakeven-case" data-reveal="up">
+        <span class="breakeven-case-label">案例二 — BTC 進場價 60,000 U</span>
+        <p class="breakeven-case-desc">BTC 價格大，跳動點數的成本感更強烈。</p>
+
+        <div class="breakeven-compare">
+          <div class="breakeven-col">
+            <h4>BitMart</h4>
+            <div class="breakeven-item">
+              <span class="breakeven-type">全掛單</span>
+              <span class="breakeven-rate">0.04%</span>
+              <p class="breakeven-math">60,000 × 0.04% = <strong>24 點</strong></p>
+              <p class="breakeven-result">BTC 漲過 24 點即回本</p>
+            </div>
+            <div class="breakeven-item">
+              <span class="breakeven-type">全市價</span>
+              <span class="breakeven-rate">0.12%</span>
+              <p class="breakeven-math">60,000 × 0.12% = <strong>72 點</strong></p>
+              <p class="breakeven-result">BTC 漲過 72 點才回本</p>
+            </div>
+          </div>
+          <div class="breakeven-col">
+            <h4>MEXC</h4>
+            <div class="breakeven-item">
+              <span class="breakeven-type">統一費率</span>
+              <span class="breakeven-rate">0.08%</span>
+              <p class="breakeven-math">60,000 × 0.08% = <strong>48 點</strong></p>
+              <p class="breakeven-result">不管市價還是限價<br />漲過 48 點就是純利</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="breakeven-bottom" data-reveal="fade">
+      看到差距了嗎？<br />
+      BitMart 掛單最省，但你必須確保成交。<br />
+      MEXC 不管怎麼打，成本都一樣——對市價派來說，這就是主場優勢。
+    </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
        Section 3 — 200倍比較
        ============================================================ -->
   <section class="leverage-compare" data-reveal="up">
@@ -238,25 +327,45 @@ import Calculator from '../components/Calculator.astro';
   <section class="route-a" data-reveal="up">
     <div class="container">
     <span class="section-number">06 &nbsp; 路線 A — 入群</span>
-    <h2 class="route-title">這不是一般的交易社群。</h2>
+    <h2 class="route-title">這不是一般的交易社群</h2>
 
     <div class="route-body">
       <p>
-        你會拿到指標、玄學日報、教學、交易紀錄<br />
-        和一個一起在市場裡活下去的群體。
+        你會拿到指標、玄學日報、交易紀錄<br />
+        以及一個陪你在市場裡活下去的群體
+      </p>
+
+      <p>
+        在這裡，教學只是個過程<br />
+        我更期待的是，當你摸透了這套遊戲規則後<br />
+        有一天能反過來提醒我、甚至教我<br />
+        交易不該是孤軍奮戰<br />
+        看懂盤面的人互相照看<br />
+        這才是能長久存活的良善循環
       </p>
 
       <p>
         前兩個月免費<br />
-        之後，若你的交易持續活躍，費用的事我們再談<br />
-        若你的虧損到了某個程度，我會請你離開。
+        之後，只要你保持著交易紀律、穩定地留在市場裡<br />
+        （別誤會，我不是要你頻繁刷交易量）<br />
+        費用的事我們再談
       </p>
 
-      <p class="route-note">不是懲罰，而是我的方式可能真的不適合你<br />這是沒關係的，一定有更適合你的交易計畫</p>
+      <p>
+        但有言在先：如果你的虧損失去控制，我會請你離開
+      </p>
+
+      <p class="route-note">
+        這絕對不是懲罰<br />
+        而是當交易變成賭博、當心態開始失衡<br />
+        或是帳面數字已經超過你能承載的負荷時<br />
+        你最需要的是強制登出，而不是繼續待在群裡上頭<br />
+        保護你的生活，永遠比任何一筆交易更重要
+      </p>
 
       <div class="route-meta">
         <p><strong>本期名額：30 人</strong></p>
-        <p>入群需要填寫申請表，我會篩選。</p>
+        <p>入群需要填寫申請表，我會篩選</p>
       </div>
     </div>
 
@@ -475,6 +584,111 @@ import Calculator from '../components/Calculator.astro';
     font-size: 0.9rem;
     color: var(--text-muted);
     font-style: italic;
+  }
+
+  /* ---- 回本點距解說 ---- */
+  .breakeven-section {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .breakeven-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .breakeven-intro {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .breakeven-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .breakeven-case {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    padding: 2rem;
+  }
+
+  .breakeven-case-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--amber);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .breakeven-case-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .breakeven-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .breakeven-col h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .breakeven-item {
+    margin-bottom: 1.25rem;
+  }
+
+  .breakeven-type {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .breakeven-rate {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .breakeven-math {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .breakeven-math strong {
+    color: var(--amber);
+    font-size: 1rem;
+  }
+
+  .breakeven-result {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .breakeven-bottom {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-top: 2.5rem;
   }
 
   /* ---- Leverage Compare ---- */
@@ -752,6 +966,11 @@ import Calculator from '../components/Calculator.astro';
 
     .fee-exchanges {
       grid-template-columns: 1fr;
+    }
+
+    .breakeven-compare {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
     .compare-row {

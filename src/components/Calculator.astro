@@ -1,167 +1,209 @@
 ---
-// Calculator.astro — Dual exchange fee calculator (BitMart + MEXC)
+// Calculator.astro — Breakeven point + net profit comparison calculator
 ---
 
-<div class="calc-grid">
+<div class="bp-calc">
+  <h3 class="bp-calc-title">回本點距與淨利對比</h3>
+  <p class="bp-calc-desc">輸入進場價和預期跳動，看看兩個交易所的真實成本差距。</p>
 
-  <!-- BitMart -->
-  <div class="calc-card" id="calcPlanBitmart">
-    <h3 class="calc-title">BitMart 合約試算</h3>
-    <div class="calc-form">
-      <div class="calc-field">
-        <label>計算模式</label>
-        <select data-calc="mode">
-          <option value="margin">USDT 本金 + 槓桿</option>
-          <option value="quantity">幣種數量 (顆數)</option>
-        </select>
-      </div>
-      <div class="calc-field">
-        <label>交易幣種</label>
-        <select data-calc="coin">
-          <option value="60000">BTC ($60,000)</option>
-          <option value="3000">ETH ($3,000)</option>
-        </select>
-      </div>
-      <div class="calc-field">
-        <label>訂單類型</label>
-        <select data-calc="order">
-          <option value="0.0006">Taker 吃單 (0.06%)</option>
-          <option value="0.0002">Maker 掛單 (0.02%)</option>
-        </select>
-      </div>
-      <div class="calc-field">
-        <label data-calc="amountLabel">投入本金 (USDT)</label>
-        <input type="number" data-calc="amount" value="100" min="0" step="any" />
-      </div>
-      <div class="calc-field" data-calc="leverageWrap">
-        <label>槓桿倍數 (最高 200x)</label>
-        <div class="calc-slider-row">
-          <input type="range" data-calc="leverage" min="1" max="200" value="100" />
-          <span class="calc-lever-val" data-calc="leverageVal">100x</span>
-        </div>
-      </div>
+  <div class="bp-inputs">
+    <div class="bp-field">
+      <label>進場幣價 (USDT)</label>
+      <input type="number" id="bpEntryPrice" value="3000" min="0" step="any" />
     </div>
-    <div class="calc-results">
-      <div class="calc-result-row"><span>總倉位價值</span><span data-calc="totalValue">0.00 USDT</span></div>
-      <div class="calc-result-row"><span>單邊手續費</span><span class="calc-fee" data-calc="oneWay">0.00 USDT</span></div>
-      <div class="calc-result-row"><span>一進一出成本</span><span class="calc-fee" data-calc="roundTrip">0.00 USDT</span></div>
-      <div class="calc-result-row calc-result-row--last" data-calc="percentWrap"><span>佔本金比例</span><span class="calc-fee" data-calc="percent">0.00%</span></div>
+    <div class="bp-field">
+      <label>預期賺取跳動點數</label>
+      <input type="number" id="bpMovePoints" value="10" min="0" step="any" />
     </div>
-    <p class="calc-note">* Maker 0.02% / Taker 0.06%。VIP 或 BMX 支付可享折扣。</p>
-    <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="calc-cta">註冊 BitMart →</a>
+    <div class="bp-field">
+      <label>交易倉位 (顆數)</label>
+      <input type="number" id="bpPositionSize" value="1" min="0" step="any" />
+    </div>
   </div>
 
-  <!-- MEXC -->
-  <div class="calc-card" id="calcPlanMexc">
-    <h3 class="calc-title">MEXC 極速合約試算</h3>
-    <div class="calc-form">
-      <div class="calc-field">
-        <label>計算模式</label>
-        <select data-calc="mode">
-          <option value="margin">USDT 本金 + 槓桿</option>
-          <option value="quantity">幣種數量 (顆數)</option>
-        </select>
-      </div>
-      <div class="calc-field">
-        <label>交易幣種</label>
-        <select data-calc="coin">
-          <option value="60000">BTC ($60,000)</option>
-          <option value="3000">ETH ($3,000)</option>
-        </select>
-      </div>
-      <div class="calc-field">
-        <label>訂單類型 (統一費率)</label>
-        <select data-calc="order">
-          <option value="0.0004">Taker 吃單 (0.04%)</option>
-          <option value="0.0004">Maker 掛單 (0.04%)</option>
-        </select>
-      </div>
-      <div class="calc-field">
-        <label data-calc="amountLabel">投入本金 (USDT)</label>
-        <input type="number" data-calc="amount" value="100" min="0" step="any" />
-      </div>
-      <div class="calc-field" data-calc="leverageWrap">
-        <label>槓桿倍數 (最高 500x)</label>
-        <div class="calc-slider-row">
-          <input type="range" data-calc="leverage" min="1" max="500" value="100" />
-          <span class="calc-lever-val" data-calc="leverageVal">100x</span>
+  <div class="bp-cards">
+
+    <!-- BitMart -->
+    <div class="bp-exchange-card">
+      <div class="bp-exchange-header bp-header--bma">BitMart <span>精算流</span></div>
+
+      <div class="bp-scenario">
+        <div class="bp-scenario-head">
+          <span>全掛單（Maker 進 / Maker 出）</span>
+          <span class="bp-rate-tag">總費率 0.04%</span>
+        </div>
+        <div class="bp-row">
+          <span>回本所需跳動點數</span>
+          <span class="bp-val" id="bmMakerBe">0.00 點</span>
+        </div>
+        <div class="bp-row bp-row--profit">
+          <span>扣除手續費真實淨利</span>
+          <span class="bp-val" id="bmMakerNet">0.00 USDT</span>
         </div>
       </div>
-    </div>
-    <div class="calc-results">
-      <div class="calc-result-row"><span>總倉位價值</span><span data-calc="totalValue">0.00 USDT</span></div>
-      <div class="calc-result-row"><span>單邊手續費</span><span class="calc-fee" data-calc="oneWay">0.00 USDT</span></div>
-      <div class="calc-result-row"><span>一進一出成本</span><span class="calc-fee" data-calc="roundTrip">0.00 USDT</span></div>
-      <div class="calc-result-row calc-result-row--last" data-calc="percentWrap"><span>佔本金比例</span><span class="calc-fee" data-calc="percent">0.00%</span></div>
-    </div>
-    <p class="calc-note">* 統一費率 Maker / Taker 皆 0.04%。Maker 掛單 0 手續費活動不定期開放。</p>
-    <a href="https://promote.mexc.com/a/pM06womH" target="_blank" rel="noopener" class="calc-cta">註冊 MEXC →</a>
-  </div>
 
+      <div class="bp-scenario">
+        <div class="bp-scenario-head">
+          <span>全市價（Taker 進 / Taker 出）</span>
+          <span class="bp-rate-tag">總費率 0.12%</span>
+        </div>
+        <div class="bp-row">
+          <span>回本所需跳動點數</span>
+          <span class="bp-val" id="bmTakerBe">0.00 點</span>
+        </div>
+        <div class="bp-row bp-row--profit">
+          <span>扣除手續費真實淨利</span>
+          <span class="bp-val" id="bmTakerNet">0.00 USDT</span>
+        </div>
+      </div>
+
+      <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="bp-cta">註冊 BitMart →</a>
+    </div>
+
+    <!-- MEXC -->
+    <div class="bp-exchange-card">
+      <div class="bp-exchange-header bp-header--mexc">MEXC <span>市價流</span></div>
+
+      <div class="bp-scenario">
+        <div class="bp-scenario-head">
+          <span>全掛單（Maker 進 / Maker 出）</span>
+          <span class="bp-rate-tag">總費率 0.08%</span>
+        </div>
+        <div class="bp-row">
+          <span>回本所需跳動點數</span>
+          <span class="bp-val" id="mexcMakerBe">0.00 點</span>
+        </div>
+        <div class="bp-row bp-row--profit">
+          <span>扣除手續費真實淨利</span>
+          <span class="bp-val" id="mexcMakerNet">0.00 USDT</span>
+        </div>
+      </div>
+
+      <div class="bp-scenario">
+        <div class="bp-scenario-head">
+          <span>全市價（Taker 進 / Taker 出）</span>
+          <span class="bp-rate-tag">總費率 0.08%</span>
+        </div>
+        <div class="bp-row">
+          <span>回本所需跳動點數</span>
+          <span class="bp-val" id="mexcTakerBe">0.00 點</span>
+        </div>
+        <div class="bp-row bp-row--profit">
+          <span>扣除手續費真實淨利</span>
+          <span class="bp-val" id="mexcTakerNet">0.00 USDT</span>
+        </div>
+      </div>
+
+      <a href="https://promote.mexc.com/a/pM06womH" target="_blank" rel="noopener" class="bp-cta">註冊 MEXC →</a>
+    </div>
+
+  </div>
 </div>
 
 <script is:inline>
-  document.querySelectorAll('.calc-card').forEach(function(card) {
-    var q = function(sel) { return card.querySelector('[data-calc="' + sel + '"]'); };
-    var mode = q('mode'), coin = q('coin'), order = q('order');
-    var amount = q('amount'), amountLabel = q('amountLabel');
-    var leverageWrap = q('leverageWrap'), leverage = q('leverage'), leverageVal = q('leverageVal');
-    var totalValue = q('totalValue'), oneWay = q('oneWay'), roundTrip = q('roundTrip');
-    var percentWrap = q('percentWrap'), percent = q('percent');
+(function() {
+  var entryPrice = document.getElementById('bpEntryPrice');
+  var movePoints = document.getElementById('bpMovePoints');
+  var positionSize = document.getElementById('bpPositionSize');
 
-    function fmt(n) {
-      return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var rates = {
+    bmMaker: 0.0004,   // 0.02% × 2
+    bmTaker: 0.0012,   // 0.06% × 2
+    mexcMaker: 0.0008,  // 0.04% × 2
+    mexcTaker: 0.0008   // 0.04% × 2
+  };
+
+  function fmt(n) {
+    return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function calc() {
+    var price = parseFloat(entryPrice.value) || 0;
+    var move = parseFloat(movePoints.value) || 0;
+    var size = parseFloat(positionSize.value) || 0;
+    var posValue = price * size;
+    var grossProfit = move * size;
+
+    function update(beId, netId, rate) {
+      var bePts = price * rate;
+      var fee = posValue * rate;
+      var net = grossProfit - fee;
+      document.getElementById(beId).textContent = fmt(bePts) + ' 點';
+      var netEl = document.getElementById(netId);
+      netEl.textContent = (net >= 0 ? '+' : '') + fmt(net) + ' USDT';
+      netEl.className = 'bp-val ' + (net >= 0 ? 'bp-profit' : 'bp-loss');
     }
 
-    function calc() {
-      var m = mode.value;
-      var price = parseFloat(coin.value);
-      var rate = parseFloat(order.value);
-      var amt = parseFloat(amount.value) || 0;
-      var lev = parseFloat(leverage.value);
-      var total = m === 'margin' ? amt * lev : amt * price;
-      var oneFee = total * rate;
-      var twoFee = oneFee * 2;
+    update('bmMakerBe', 'bmMakerNet', rates.bmMaker);
+    update('bmTakerBe', 'bmTakerNet', rates.bmTaker);
+    update('mexcMakerBe', 'mexcMakerNet', rates.mexcMaker);
+    update('mexcTakerBe', 'mexcTakerNet', rates.mexcTaker);
+  }
 
-      totalValue.textContent = fmt(total) + ' USDT';
-      oneWay.textContent = fmt(oneFee) + ' USDT';
-      roundTrip.textContent = fmt(twoFee) + ' USDT';
-
-      if (m === 'margin' && amt > 0) {
-        percent.textContent = ((twoFee / amt) * 100).toFixed(2) + '%';
-      }
-    }
-
-    leverage.addEventListener('input', function() {
-      leverageVal.textContent = leverage.value + 'x';
-      calc();
-    });
-
-    mode.addEventListener('change', function() {
-      if (mode.value === 'margin') {
-        leverageWrap.style.display = '';
-        amountLabel.textContent = '投入本金 (USDT)';
-        amount.value = 100;
-        percentWrap.style.display = '';
-      } else {
-        leverageWrap.style.display = 'none';
-        amountLabel.textContent = '交易數量 (顆數)';
-        amount.value = 1;
-        percentWrap.style.display = 'none';
-      }
-      calc();
-    });
-
-    [coin, order, amount].forEach(function(el) {
-      el.addEventListener('input', calc);
-    });
-
-    calc();
+  [entryPrice, movePoints, positionSize].forEach(function(el) {
+    el.addEventListener('input', calc);
   });
+
+  calc();
+})();
 </script>
 
 <style>
-  .calc-grid {
+  .bp-calc {
+    max-width: 100%;
+  }
+
+  .bp-calc-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .bp-calc-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .bp-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .bp-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  .bp-field input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+
+  .bp-field input:focus {
+    outline: none;
+    border-color: var(--amber);
+  }
+
+  .bp-cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1px;
@@ -169,132 +211,113 @@
     border: 1px solid var(--border);
   }
 
-  .calc-card {
+  .bp-exchange-card {
     background: var(--bg-card);
-    padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
   }
 
-  .calc-title {
-    font-size: 1.15rem;
+  .bp-exchange-header {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--amber);
+    border-bottom: 1px solid var(--border);
   }
 
-  .calc-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .calc-field label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 600;
+  .bp-exchange-header span {
+    font-size: 0.75rem;
+    font-weight: 400;
     color: var(--text-muted);
-    margin-bottom: 0.35rem;
-    letter-spacing: 0.02em;
+    margin-left: 0.5rem;
   }
 
-  .calc-field select,
-  .calc-field input[type="number"] {
-    width: 100%;
-    padding: 0.6rem 0.75rem;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text);
-    font-size: 0.9rem;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
+  .bp-header--bma {
+    border-left: 3px solid var(--amber);
   }
 
-  .calc-field select:focus,
-  .calc-field input:focus {
-    outline: none;
-    border-color: var(--amber);
+  .bp-header--mexc {
+    border-left: 3px solid var(--text);
   }
 
-  .calc-slider-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  .bp-scenario {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
   }
 
-  .calc-slider-row input[type="range"] {
-    flex: 1;
-    accent-color: var(--amber);
-    height: 4px;
+  .bp-scenario:last-of-type {
+    border-bottom: none;
   }
 
-  .calc-lever-val {
-    font-weight: 700;
-    color: var(--amber);
-    min-width: 45px;
-    text-align: right;
-    font-size: 0.95rem;
-  }
-
-  .calc-results {
-    margin-top: 1.5rem;
-    background: rgba(196, 168, 74, 0.04);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1.25rem;
-  }
-
-  .calc-result-row {
+  .bp-scenario-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    padding: 0.4rem 0;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
   }
 
-  .calc-result-row--last {
+  .bp-rate-tag {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--amber);
+    border: 1px solid rgba(196, 168, 74, 0.3);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .bp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 0.35rem 0;
+  }
+
+  .bp-row--profit {
     margin-top: 0.5rem;
     padding-top: 0.75rem;
     border-top: 1px dashed var(--border);
   }
 
-  .calc-fee {
+  .bp-val {
     font-weight: 700;
-    color: var(--red, #C87840);
-  }
-
-  .calc-result-row span:last-child:not(.calc-fee) {
-    font-weight: 600;
     color: var(--text);
   }
 
-  .calc-note {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 1rem;
-    line-height: 1.6;
+  .bp-profit {
+    color: var(--amber) !important;
   }
 
-  .calc-cta {
-    display: inline-block;
+  .bp-loss {
+    color: var(--red, #C87840) !important;
+  }
+
+  .bp-cta {
+    display: block;
+    padding: 1rem 1.5rem;
     font-size: 0.85rem;
     color: var(--amber);
     text-decoration: none;
     letter-spacing: 0.06em;
-    margin-top: 1.25rem;
+    border-top: 1px solid var(--border);
     transition: opacity 0.3s;
+    margin-top: auto;
   }
 
-  .calc-cta:hover {
+  .bp-cta:hover {
     opacity: 0.7;
   }
 
   @media (max-width: 768px) {
-    .calc-grid {
+    .bp-inputs {
+      grid-template-columns: 1fr;
+    }
+
+    .bp-cards {
       grid-template-columns: 1fr;
     }
   }
