@@ -1,12 +1,12 @@
 ---
-// index.astro — 首頁
+// index.astro — 首頁（改版）
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="首頁">
 
   <!-- ============================================================
-       Section 1 — Hero
+       Section 1 — Hero（逐詞動畫）
        ============================================================ -->
   <section class="hero">
     <div class="container">
@@ -14,7 +14,11 @@ import Layout from '../layouts/Layout.astro';
       <span class="hero-rule" data-hero></span>
 
       <h1 class="hero-headline" data-hero>
-        While they hold<br />we flip.
+        <span class="word-reveal">While</span>
+        <span class="word-reveal">they</span>
+        <span class="word-reveal">hold,</span><br />
+        <span class="word-reveal">we</span>
+        <span class="word-reveal" style="color: var(--amber)">flip.</span>
       </h1>
 
       <p class="hero-chinese" data-hero>
@@ -36,13 +40,130 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- ============================================================
-       Section 2 — 爭議說明
+       Section 2 — 打法（先建立實力感）
        ============================================================ -->
-  <section class="dispute" data-reveal="up">
+  <section class="trading-method">
     <div class="container">
-    <h2 class="dispute-title">先說清楚幾件事。</h2>
+    <span class="section-label" data-reveal="fade">01 &nbsp; 打法</span>
+    <h2 class="trading-title" data-reveal="up">打法說清楚。</h2>
 
-    <div class="dispute-body">
+    <div class="trading-grid">
+      <div class="trading-desc" data-reveal="left">
+        <p>
+          全倉槓桿，1–3 分鐘圖<br />
+          你知道你為什麼進場，才是這裡的人。
+        </p>
+        <p class="trading-english">Short frame. Fast exit. Repeat.</p>
+      </div>
+
+      <div class="trading-rows" data-stagger>
+        <div class="trading-row" data-reveal="up">
+          <span class="trading-leverage">10×</span>
+          <span class="trading-arrow">→</span>
+          <span class="trading-position">1,000U 的部位</span>
+        </div>
+        <div class="trading-row" data-reveal="up">
+          <span class="trading-leverage">50×</span>
+          <span class="trading-arrow">→</span>
+          <span class="trading-position">5,000U 的部位</span>
+        </div>
+        <div class="trading-row trading-row--highlight" data-reveal="up">
+          <span class="trading-leverage trading-leverage--big">200×</span>
+          <span class="trading-arrow">→</span>
+          <span class="trading-position trading-position--highlight">20,000U 的部位</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 3 — 數字區（帶脈絡 + 計數動畫）
+       ============================================================ -->
+  <section class="stats-section">
+    <div class="container">
+    <div class="stats-grid" data-stagger>
+      <div class="stat-block" data-reveal="up">
+        <span class="stat-number" data-count="30">0</span>
+        <span class="stat-unit">人</span>
+        <span class="stat-label">本期名額上限</span>
+        <span class="stat-context">篩選制，不開放候補</span>
+      </div>
+      <div class="stat-block" data-reveal="up">
+        <span class="stat-number" data-count="200">0</span>
+        <span class="stat-unit">×</span>
+        <span class="stat-label">全倉槓桿倍數</span>
+        <span class="stat-context">配合 1–3 分鐘圖，不過夜</span>
+      </div>
+      <div class="stat-block" data-reveal="up">
+        <span class="stat-number" data-count="60">0</span>
+        <span class="stat-unit">%</span>
+        <span class="stat-label">玄學日報參考準確率</span>
+        <span class="stat-context">我不會說更高，因為市場沒有人說得準</span>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 4 — 武器庫
+       ============================================================ -->
+  <section class="arsenal">
+    <div class="container">
+    <span class="section-label" data-reveal="fade">02 &nbsp; 武器庫</span>
+    <h2 class="arsenal-title" data-reveal="up">加入後，你拿到這些。</h2>
+
+    <div class="arsenal-grid" data-stagger>
+
+      <a href="/tools" class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon">卦</span>
+        <h3>玄學日報</h3>
+        <p>八字 × 紫微 × 人類圖<br />每日市場能量分析</p>
+      </a>
+
+      <a href="/tools" class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon">⊞</span>
+        <h3>TradingView 指標</h3>
+        <p>專屬指標<br />配合 1–3 分鐘圖使用</p>
+      </a>
+
+      <a href="/tools" class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon">◉</span>
+        <h3>Binance × Bitget 監控</h3>
+        <p>AI 聚合分析<br />主流幣動態直接讀</p>
+      </a>
+
+      <a href="/tools" class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon">⇄</span>
+        <h3>交易紀錄</h3>
+        <p>真實進出場分享<br />帶邏輯，不只報明牌</p>
+      </a>
+
+      <a href="/tools" class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon">◬</span>
+        <h3>社群討論</h3>
+        <p>30 人小群<br />不喊單，討論打法</p>
+      </a>
+
+      <a href="/tools#bitmart" class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon">◇</span>
+        <h3>BitMart Card</h3>
+        <p>加密貨幣出金方案<br />刷卡返現最高 8%</p>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Section 5 — 爭議說明（下移，已建立信任後再坦白）
+       ============================================================ -->
+  <section class="dispute">
+    <div class="container">
+    <span class="section-label" data-reveal="fade">03 &nbsp; 坦白說</span>
+    <h2 class="dispute-title" data-reveal="up">先說清楚幾件事。</h2>
+
+    <div class="dispute-body" data-reveal="up">
       <p>
         我打高槓桿。持倉時間短，有時候就幾分鐘<br />
         手續費綜合計算確實比較多，你使用我的邀請碼<br />
@@ -63,119 +184,14 @@ import Layout from '../layouts/Layout.astro';
       </p>
     </div>
 
-    <p class="dispute-english">
+    <p class="dispute-english" data-reveal="fade">
       The math works. The plan is simple. The execution is honest.
     </p>
     </div>
   </section>
 
   <!-- ============================================================
-       Section 3 — 玄學
-       ============================================================ -->
-  <section class="metaphysics" data-reveal="slow">
-    <div class="metaphysics-accent"></div>
-    <div class="container">
-    <h2 class="metaphysics-title">玄學不是預測市場。</h2>
-
-    <div class="metaphysics-body">
-      <p>
-        八字、紫微斗數、人類圖——<br />
-        三套系統的流日能量，交叉分析當天市場可能的動能走向。
-      </p>
-
-      <p>
-        準確率大約 60%<br />
-        我不會說更高的數字，因為市場沒有人說得準。
-      </p>
-
-      <p>但這不是重點。</p>
-
-      <p>
-        重點是：當你知道今天的能量偏多或偏空<br />
-        你進場不再是衝動，你出場不再是捨不得。
-      </p>
-
-      <p>
-        它給你的不是答案<br />
-        是一個讓你對自己的決定有意識的框架。
-      </p>
-    </div>
-
-    <p class="metaphysics-english">
-      Energy doesn't lie. But you still have to execute.
-    </p>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       Section 4 — Separator
-       ============================================================ -->
-  <section class="separator">
-    <div class="container">
-      <hr class="amber-hr" />
-    </div>
-  </section>
-
-  <!-- ============================================================
-       Section 5 — 打單方式
-       ============================================================ -->
-  <section class="trading-method">
-    <div class="container">
-    <h2 class="trading-title" data-reveal="up">打法說清楚。</h2>
-
-    <div class="trading-rows" data-stagger>
-      <div class="trading-row" data-reveal="up">
-        <span class="trading-leverage">10 倍</span>
-        <span class="trading-arrow">→</span>
-        <span class="trading-position">1,000U 的部位</span>
-      </div>
-      <div class="trading-row" data-reveal="up">
-        <span class="trading-leverage">50 倍</span>
-        <span class="trading-arrow">→</span>
-        <span class="trading-position">5,000U 的部位</span>
-      </div>
-      <div class="trading-row trading-row--highlight" data-reveal="up">
-        <span class="trading-leverage trading-leverage--big">200 倍</span>
-        <span class="trading-arrow">→</span>
-        <span class="trading-position trading-position--highlight">20,000U 的部位</span>
-      </div>
-    </div>
-
-    <p class="trading-close" data-reveal="up">Short frame. Fast exit. Repeat.</p>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       Section 6 — 服務概覽
-       ============================================================ -->
-  <section class="overview">
-    <div class="container">
-    <div class="overview-grid">
-      <div class="overview-left" data-reveal="left">
-        <span class="section-number">方案</span>
-        <p class="overview-copy">
-          加入社群、取得指標<br />
-          跟著一起翻倉。
-        </p>
-        <a href="/plans" class="arrow-link">→ 了解方案 &nbsp;<em>See the plan</em></a>
-      </div>
-
-      <div class="overview-divider" aria-hidden="true"></div>
-
-      <div class="overview-right" data-reveal="right">
-        <span class="section-number">工具 &amp; 產品</span>
-        <p class="overview-copy">
-          玄學日報、交易指標<br />
-          幣安監控工具。
-        </p>
-        <a href="/tools" class="arrow-link">→ 查看工具 &nbsp;<em>See the tools</em></a>
-      </div>
-    </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       Section 7 — CTA
+       Section 6 — CTA
        ============================================================ -->
   <section class="cta-section">
     <div class="cta-inner" data-reveal="up">
@@ -207,21 +223,61 @@ import Layout from '../layouts/Layout.astro';
 
 </Layout>
 
+<!-- 逐詞動畫 + 計數動畫腳本 -->
+<script>
+  // 逐詞動畫
+  document.addEventListener('DOMContentLoaded', () => {
+    const words = document.querySelectorAll('.word-reveal');
+    words.forEach((word, i) => {
+      word.style.opacity = '0';
+      word.style.transform = 'translateY(18px)';
+      word.style.transition = `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.1 + 0.3}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.1 + 0.3}s`;
+      word.style.display = 'inline-block';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          word.style.opacity = '1';
+          word.style.transform = 'translateY(0)';
+        });
+      });
+    });
+
+    // 數字計數動畫
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 1200;
+        const start = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+  });
+</script>
+
 <style>
   /* ---- Hero ---- */
   .hero {
     height: 100vh;
     background: var(--bg);
-    background-image: radial-gradient(ellipse 80% 60% at 85% 85%, rgba(212, 137, 26, 0.12) 0%, transparent 70%);
+    background-image: radial-gradient(ellipse 80% 60% at 85% 85%, rgba(196, 168, 74, 0.08) 0%, transparent 70%);
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
   }
 
-  .hero .container {
-    width: 100%;
-  }
+  .hero .container { width: 100%; }
 
   .hero-inner {
     display: flex;
@@ -244,6 +300,11 @@ import Layout from '../layouts/Layout.astro';
     line-height: 1.05;
     color: var(--text);
     max-width: 14ch;
+  }
+
+  .word-reveal {
+    display: inline-block;
+    margin-right: 0.25em;
   }
 
   .hero-chinese {
@@ -271,116 +332,55 @@ import Layout from '../layouts/Layout.astro';
     margin-top: 1.2rem;
   }
 
-  /* ---- 爭議說明 ---- */
-  .dispute {
+  /* ---- Section Label ---- */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .section-label::after {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: var(--amber);
+    opacity: 0.4;
+  }
+
+  /* ---- 打法 ---- */
+  .trading-method {
     padding: 120px 0;
   }
 
-  .dispute-title {
+  .trading-title {
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
     font-weight: 700;
     margin-bottom: 3rem;
   }
 
-  .dispute-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  .trading-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
   }
 
-  .dispute-body p {
+  .trading-desc p {
     font-size: 1.1rem;
-    line-height: 1.95;
-    color: var(--text);
-  }
-
-  .dispute-truth {
-    color: var(--red) !important;
-    font-size: 1.25rem !important;
-    font-weight: 600;
-    margin: 0.5rem 0 !important;
-  }
-
-  .dispute-english {
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    color: var(--amber);
-    margin-top: 3rem;
-  }
-
-  /* ---- 玄學 ---- */
-  .metaphysics {
-    padding: 120px 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .metaphysics-accent {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: var(--blue);
-    opacity: 0.04;
-    right: -200px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-
-  .metaphysics-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 700;
-    max-width: 12ch;
-    margin-bottom: 3rem;
-    position: relative;
-  }
-
-  .metaphysics-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 580px;
-    position: relative;
-  }
-
-  .metaphysics-body p {
-    font-size: 1.05rem;
     line-height: 2;
     color: var(--text);
   }
 
-  .metaphysics-english {
-    font-size: 1.1rem;
-    letter-spacing: 0.08em;
+  .trading-english {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
     color: var(--amber);
-    margin-top: 3rem;
-    font-weight: 500;
-    position: relative;
-  }
-
-  /* ---- Separator ---- */
-  .separator {
-    padding: 80px 0;
-  }
-
-  .amber-hr {
-    width: 100px;
-    height: 1px;
-    background: var(--amber);
-    border: none;
-    opacity: 0.6;
-  }
-
-  /* ---- 打單方式 ---- */
-  .trading-method {
-    padding: 100px 0;
-  }
-
-  .trading-title {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 700;
-    margin-bottom: 3rem;
   }
 
   .trading-rows {
@@ -407,52 +407,150 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 800;
   }
 
-  .trading-arrow {
-    color: var(--text-muted);
-    font-size: 1rem;
+  .trading-arrow { color: var(--text-muted); font-size: 1rem; }
+  .trading-position { color: var(--text-muted); font-size: 1rem; }
+  .trading-position--highlight { color: var(--text); font-weight: 600; }
+
+  /* ---- 數字區 ---- */
+  .stats-section {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
 
-  .trading-position {
-    color: var(--text-muted);
-    font-size: 1rem;
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
   }
 
-  .trading-position--highlight {
-    color: var(--text);
-    font-weight: 600;
+  .stat-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
   }
 
-  .trading-close {
-    margin-top: 3rem;
-    font-size: 1rem;
-    letter-spacing: 0.12em;
+  .stat-number {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 300;
     color: var(--amber);
+    letter-spacing: -0.03em;
+    line-height: 1;
   }
 
-  /* ---- 服務概覽 ---- */
-  .overview {
+  .stat-unit {
+    font-size: 1.5rem;
+    color: var(--amber);
+    font-weight: 300;
+    margin-top: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-top: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .stat-context {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+    max-width: 200px;
+  }
+
+  /* ---- 武器庫 ---- */
+  .arsenal {
     padding: 120px 0;
   }
 
-  .overview-grid {
+  .arsenal-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 3.5rem;
+  }
+
+  .arsenal-grid {
     display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    gap: 0 4vw;
-    align-items: start;
-    max-width: 900px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
   }
 
-  .overview-divider {
-    background: var(--amber);
-    opacity: 0.3;
-    height: 200px;
-    align-self: center;
+  .arsenal-card {
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s var(--ease-out);
+    display: flex;
+    flex-direction: column;
   }
 
-  .overview-copy {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
+  .arsenal-card:hover {
+    background: #1a2a1c;
+  }
+
+  .arsenal-icon {
+    font-size: 1.5rem;
+    color: var(--amber);
+    margin-bottom: 1.25rem;
+    line-height: 1;
+  }
+
+  .arsenal-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .arsenal-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ---- 爭議說明 ---- */
+  .dispute {
+    padding: 120px 0;
+  }
+
+  .dispute-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 3rem;
+  }
+
+  .dispute-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 640px;
+  }
+
+  .dispute-body p {
+    font-size: 1.1rem;
+    line-height: 1.95;
+    color: var(--text);
+  }
+
+  .dispute-truth {
+    color: var(--red) !important;
+    font-size: 1.25rem !important;
+    font-weight: 600;
+    margin: 0.5rem 0 !important;
+  }
+
+  .dispute-english {
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    margin-top: 3rem;
   }
 
   /* ---- CTA ---- */
@@ -465,9 +563,7 @@ import Layout from '../layouts/Layout.astro';
     padding: 80px 0;
   }
 
-  .cta-inner {
-    max-width: 560px;
-  }
+  .cta-inner { max-width: 560px; }
 
   .cta-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
@@ -506,20 +602,37 @@ import Layout from '../layouts/Layout.astro';
     margin-top: 3rem;
   }
 
-  /* Mobile */
+  /* ---- Mobile ---- */
   @media (max-width: 768px) {
-    .overview-grid {
+    .trading-grid {
       grid-template-columns: 1fr;
+      gap: 2.5rem;
     }
 
-    .overview-divider {
-      width: 100%;
-      height: 1px;
-      margin: 2rem 0;
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
     }
 
-    .trading-row {
-      gap: 1rem;
+    .stat-block {
+      padding: 2rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-block:last-child {
+      border-bottom: none;
+    }
+
+    .arsenal-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .trading-row { gap: 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .arsenal-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
