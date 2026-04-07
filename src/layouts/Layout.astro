@@ -25,7 +25,7 @@ const { title, description = 'X翻倉計畫 — 一個給短線交易者的社�
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <title>{title} — X翻倉計畫</title>
+    <title>{title === 'X翻倉計畫' ? title : `${title} — X翻倉計畫`}</title>
   </head>
   <body>
     <Nav />
