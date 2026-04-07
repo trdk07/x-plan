@@ -1,9 +1,13 @@
 ---
 // index.astro — 首頁（改版）
 import Layout from '../layouts/Layout.astro';
+import SplashCrystal from '../components/SplashCrystal.astro';
 ---
 
 <Layout title="首頁">
+
+  <!-- Splash Overlay (light beam → crystal → ENTER) -->
+  <SplashCrystal />
 
   <!-- ============================================================
        Section 1 — Hero（逐詞動畫）
@@ -30,7 +34,7 @@ import Layout from '../layouts/Layout.astro';
         Short frame. Clear mind. Better sleep.
       </p>
 
-      <a href="/plans" class="btn btn-amber hero-cta" data-hero>了解方案</a>
+      <a href="https://tally.so/r/RGYNNl" target="_blank" rel="noopener" class="btn btn-amber hero-cta" data-hero>申請入群</a>
 
       <p class="hero-sub" data-hero>
         一個給短線交易者的社群。玄學流日 × 技術分析 × 真實交易紀錄。
@@ -115,42 +119,89 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="arsenal-grid" data-stagger>
 
-      <a href="/tools" class="arsenal-card" data-reveal="up">
+      <div class="arsenal-card" data-reveal="up">
         <span class="arsenal-icon">卦</span>
         <h3>玄學日報</h3>
         <p>八字 × 紫微 × 人類圖<br />每日市場能量分析</p>
-      </a>
+      </div>
 
-      <a href="/tools" class="arsenal-card" data-reveal="up">
-        <span class="arsenal-icon">⊞</span>
+      <div class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon arsenal-icon--svg">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="5" y1="4" x2="5" y2="24" stroke="var(--amber)" stroke-width="0.8" opacity="0.4"/>
+            <rect x="3" y="8" width="4" height="10" rx="0.5" fill="var(--amber)" opacity="0.7"/>
+            <line x1="11" y1="6" x2="11" y2="22" stroke="var(--amber)" stroke-width="0.8" opacity="0.4"/>
+            <rect x="9" y="6" width="4" height="8" rx="0.5" stroke="var(--amber)" stroke-width="1" fill="none"/>
+            <line x1="17" y1="3" x2="17" y2="20" stroke="var(--amber)" stroke-width="0.8" opacity="0.4"/>
+            <rect x="15" y="3" width="4" height="10" rx="0.5" stroke="var(--amber)" stroke-width="1" fill="none"/>
+            <line x1="23" y1="5" x2="23" y2="23" stroke="var(--amber)" stroke-width="0.8" opacity="0.4"/>
+            <rect x="21" y="9" width="4" height="9" rx="0.5" fill="var(--amber)" opacity="0.7"/>
+          </svg>
+        </span>
         <h3>TradingView 指標</h3>
         <p>專屬指標<br />配合 1–3 分鐘圖使用</p>
-      </a>
+      </div>
 
-      <a href="/tools" class="arsenal-card" data-reveal="up">
+      <div class="arsenal-card" data-reveal="up">
         <span class="arsenal-icon">◉</span>
         <h3>Binance × Bitget 監控</h3>
         <p>AI 聚合分析<br />主流幣動態直接讀</p>
-      </a>
+      </div>
 
-      <a href="/tools" class="arsenal-card" data-reveal="up">
+      <div class="arsenal-card" data-reveal="up">
         <span class="arsenal-icon">⇄</span>
         <h3>交易紀錄</h3>
         <p>真實進出場分享<br />帶邏輯，不只報明牌</p>
-      </a>
+      </div>
 
-      <a href="/tools" class="arsenal-card" data-reveal="up">
-        <span class="arsenal-icon">◬</span>
+      <div class="arsenal-card" data-reveal="up">
+        <span class="arsenal-icon arsenal-icon--svg arsenal-icon--dual">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.44.7-.9.44l-2.48-1.84-1.2 1.16c-.14.14-.24.24-.5.24l.18-2.52 4.56-4.12c.2-.18-.04-.28-.3-.1l-5.64 3.56-2.42-.76c-.52-.16-.54-.52.12-.78l9.48-3.66c.44-.16.82.1.68.7z" fill="var(--amber)"/>
+          </svg>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 5.94 2 10.7c0 4.22 3.66 7.76 8.62 8.44.34.08.8.22.92.52.1.26.06.68.04.94l-.16.92c-.04.26-.2 1.02.9.56.86-.36 5.56-3.28 7.58-5.62C21.76 14.38 22 12.62 22 10.7 22 5.94 17.52 2 12 2zm-3.2 11.2H6.6c-.32 0-.58-.26-.58-.58V8.78c0-.32.26-.58.58-.58s.58.26.58.58v3.26h1.62c.32 0 .58.26.58.58 0 .32-.26.58-.58.58zm1.96-.58c0 .32-.26.58-.58.58s-.58-.26-.58-.58V8.78c0-.32.26-.58.58-.58s.58.26.58.58v3.84zm4.24 0c0 .24-.14.44-.36.54a.56.56 0 01-.64-.12l-2.16-2.94v2.52c0 .32-.26.58-.58.58s-.58-.26-.58-.58V8.78c0-.24.14-.44.36-.54a.56.56 0 01.64.12l2.16 2.94V8.78c0-.32.26-.58.58-.58s.58.26.58.58v3.84zm2.6-2.42c.32 0 .58.26.58.58 0 .32-.26.58-.58.58h-1.62v1.26h1.62c.32 0 .58.26.58.58 0 .32-.26.58-.58.58h-2.2c-.32 0-.58-.26-.58-.58V8.78c0-.32.26-.58.58-.58h2.2c.32 0 .58.26.58.58 0 .32-.26.58-.58.58h-1.62v1.26h1.62z" fill="var(--amber)"/>
+          </svg>
+        </span>
         <h3>社群討論</h3>
         <p>30 人小群<br />不喊單，討論打法</p>
-      </a>
+      </div>
 
-      <a href="/tools#bitmart" class="arsenal-card" data-reveal="up">
-        <span class="arsenal-icon">◇</span>
-        <h3>BitMart Card</h3>
-        <p>加密貨幣出金方案<br />刷卡返現最高 8%</p>
-      </a>
+    </div>
 
+    <!-- 交易所推薦 -->
+    <div class="exchange-section" data-reveal="up">
+      <h3 class="exchange-heading">交易所精選</h3>
+      <div class="exchange-grid">
+
+        <div class="exchange-card">
+          <div class="exchange-header">
+            <span class="exchange-name">BitMart</span>
+            <span class="exchange-tag">出金首選</span>
+          </div>
+          <ul class="exchange-features">
+            <li>加密貨幣 Visa 卡，全球刷卡消費</li>
+            <li>最高 8% 刷卡返現</li>
+            <li>支援多幣種出金，到帳快速</li>
+          </ul>
+          <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="exchange-cta">註冊 BitMart →</a>
+        </div>
+
+        <div class="exchange-card">
+          <div class="exchange-header">
+            <span class="exchange-name">MEXC</span>
+            <span class="exchange-tag">短線主場</span>
+          </div>
+          <ul class="exchange-features">
+            <li>合約 Maker 手續費 0%，Taker 低至 0.01%</li>
+            <li>最高 500× 槓桿，極致資金效率</li>
+            <li>ether.fi 聯名 Visa 卡：日常 3% / 旅遊 5% 返現，零海外手續費</li>
+            <li>3,000+ 幣種，新幣首發上架</li>
+          </ul>
+          <a href="https://promote.mexc.com/a/pM06womH" target="_blank" rel="noopener" class="exchange-cta">註冊 MEXC →</a>
+        </div>
+
+      </div>
     </div>
     </div>
   </section>
@@ -215,24 +266,27 @@ import Layout from '../layouts/Layout.astro';
       </p>
 
       <div class="cta-buttons">
-        <a href="/plans" class="btn btn-amber">了解方案</a>
-        <a href="#" class="btn btn-ghost">先加入大群</a>
+        <a href="https://tally.so/r/RGYNNl" target="_blank" rel="noopener" class="btn btn-amber">申請入群</a>
+        <a href="https://line.me/ti/g2/iJVevTUgPmRXwsRXYpALrQ-oDxdZrAiCjzR2EQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" class="btn btn-ghost">先加入大群</a>
       </div>
     </div>
   </section>
 
 </Layout>
 
-<!-- 逐詞動畫 + 計數動畫腳本 -->
+<!-- 逐詞動畫 + 計數動畫腳本（等 splash 結束後才觸發） -->
 <script>
-  // 逐詞動畫
-  document.addEventListener('DOMContentLoaded', () => {
-    const words = document.querySelectorAll('.word-reveal');
-    words.forEach((word, i) => {
-      word.style.opacity = '0';
-      word.style.transform = 'translateY(18px)';
+  // 隱藏逐詞元素（立即）
+  const words = document.querySelectorAll('.word-reveal');
+  words.forEach((word: HTMLElement) => {
+    word.style.opacity = '0';
+    word.style.transform = 'translateY(18px)';
+    word.style.display = 'inline-block';
+  });
+
+  function startWordReveal() {
+    words.forEach((word: HTMLElement, i: number) => {
       word.style.transition = `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.1 + 0.3}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.1 + 0.3}s`;
-      word.style.display = 'inline-block';
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           word.style.opacity = '1';
@@ -240,20 +294,21 @@ import Layout from '../layouts/Layout.astro';
         });
       });
     });
+  }
 
-    // 數字計數動畫
+  function startCounters() {
     const countObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.dataset.count, 10);
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.count!, 10);
         const duration = 1200;
         const start = performance.now();
 
-        function tick(now) {
+        function tick(now: number) {
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.round(target * eased);
+          el.textContent = String(Math.round(target * eased));
           if (progress < 1) requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
@@ -262,7 +317,19 @@ import Layout from '../layouts/Layout.astro';
     }, { threshold: 0.5 });
 
     document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
-  });
+  }
+
+  if (document.getElementById('splash')) {
+    document.addEventListener('splash-exited', () => {
+      startWordReveal();
+      startCounters();
+    });
+  } else {
+    document.addEventListener('DOMContentLoaded', () => {
+      startWordReveal();
+      startCounters();
+    });
+  }
 </script>
 
 <style>
@@ -486,13 +553,36 @@ import Layout from '../layouts/Layout.astro';
     padding: 2.5rem 2rem;
     text-decoration: none;
     color: inherit;
-    transition: background 0.3s var(--ease-out);
+    transition: background 0.4s var(--ease-out), transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
     display: flex;
     flex-direction: column;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .arsenal-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+    background: radial-gradient(ellipse at 50% 0%, rgba(196, 168, 74, 0.06) 0%, transparent 70%);
+    pointer-events: none;
   }
 
   .arsenal-card:hover {
     background: #1a2a1c;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(196, 168, 74, 0.1);
+  }
+
+  .arsenal-card:hover::after {
+    opacity: 1;
+  }
+
+  .arsenal-card:hover .arsenal-icon {
+    transform: scale(1.1);
   }
 
   .arsenal-icon {
@@ -500,6 +590,24 @@ import Layout from '../layouts/Layout.astro';
     color: var(--amber);
     margin-bottom: 1.25rem;
     line-height: 1;
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .arsenal-icon--svg {
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .arsenal-icon--svg svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .arsenal-icon--dual svg {
+    width: 22px;
+    height: 22px;
   }
 
   .arsenal-card h3 {
@@ -513,6 +621,108 @@ import Layout from '../layouts/Layout.astro';
     font-size: 0.85rem;
     color: var(--text-muted);
     line-height: 1.7;
+  }
+
+  /* ---- 交易所推薦 ---- */
+  .exchange-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .exchange-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .exchange-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .exchange-card {
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: background 0.3s var(--ease-out);
+  }
+
+  .exchange-card:hover {
+    background: #1a2a1c;
+  }
+
+  .exchange-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .exchange-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .exchange-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    border: 1px solid rgba(196, 168, 74, 0.3);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .exchange-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .exchange-features li {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .exchange-features li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-weight: 700;
+  }
+
+  .exchange-cta {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--amber);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    transition: opacity 0.3s;
+  }
+
+  .exchange-cta:hover {
+    opacity: 0.7;
+  }
+
+  .exchange-cta--soon {
+    color: var(--text-muted);
+    pointer-events: none;
   }
 
   /* ---- 爭議說明 ---- */
@@ -625,6 +835,10 @@ import Layout from '../layouts/Layout.astro';
 
     .arsenal-grid {
       grid-template-columns: 1fr 1fr;
+    }
+
+    .exchange-grid {
+      grid-template-columns: 1fr;
     }
 
     .trading-row { gap: 1rem; }

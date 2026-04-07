@@ -86,21 +86,32 @@ const { title, description = 'X翻倉計畫 — 一個給短線交易者的社�
 
       // Hero load animations
       const heroElements = document.querySelectorAll('[data-hero]');
-      heroElements.forEach((el, i) => {
-        const delay = 0.3 + i * 0.2;
+      heroElements.forEach((el) => {
         const elem = el as HTMLElement;
         elem.style.opacity = '0';
         elem.style.transform = 'translateY(12px)';
-        elem.style.transition = `opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1)`;
-        elem.style.transitionDelay = `${delay}s`;
-
-        requestAnimationFrame(() => {
-          setTimeout(() => {
-            elem.style.opacity = '1';
-            elem.style.transform = 'translateY(0)';
-          }, 50);
-        });
       });
+
+      function animateHero() {
+        heroElements.forEach((el, i) => {
+          const delay = 0.3 + i * 0.2;
+          const elem = el as HTMLElement;
+          elem.style.transition = `opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1)`;
+          elem.style.transitionDelay = `${delay}s`;
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              elem.style.opacity = '1';
+              elem.style.transform = 'translateY(0)';
+            }, 50);
+          });
+        });
+      }
+
+      if (document.getElementById('splash')) {
+        document.addEventListener('splash-exited', animateHero);
+      } else {
+        animateHero();
+      }
     </script>
   </body>
 </html>
