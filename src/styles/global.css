@@ -124,8 +124,6 @@ nav.scrolled {
   font-weight: 600;
   color: var(--text);
   letter-spacing: 0.02em;
-  display: flex;
-  align-items: center;
 }
 
 .nav-links {

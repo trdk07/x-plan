@@ -101,34 +101,40 @@ import Layout from '../layouts/Layout.astro';
        ============================================================ -->
   <section class="rebate-section">
     <div class="container">
-    <div class="rebate-inner" data-reveal="up">
-      <h2 class="rebate-title">關於返傭。</h2>
+    <div class="rebate-grid">
+      <div class="rebate-inner" data-reveal="left">
+        <h2 class="rebate-title">關於返傭。</h2>
 
-      <p class="rebate-warning">如果你覺得我在洗你的交易量——</p>
+        <p class="rebate-warning">如果你覺得我在洗你的交易量——</p>
 
-      <div class="rebate-body">
-        <p>你用我的邀請碼，我拿返傭，是真的<br />
-        我自己靠這個打法賺的，比返傭多很多，也是真的。</p>
+        <div class="rebate-body">
+          <p>你用我的邀請碼，我拿返傭，是真的<br />
+          我自己靠這個打法賺的，比返傭多很多，也是真的。</p>
 
-        <p>那我們可能從一開始就不適合。</p>
+          <p>那我們可能從一開始就不適合。</p>
 
-        <p>
-          如果你在兩個月後覺得這間交易所不適合你<br />
-          沒關係，指標可以單獨訂閱，換回你習慣的地方繼續用。
-        </p>
+          <p>
+            如果你在兩個月後覺得這間交易所不適合你<br />
+            沒關係，指標可以單獨訂閱，換回你習慣的地方繼續用。
+          </p>
 
-        <p>退路一直在，要不要走是你的選擇。</p>
+          <p>退路一直在，要不要走是你的選擇。</p>
+        </div>
+
+        <p class="rebate-english">The option is always there.</p>
+
+        <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem;">
+          <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
+            → BitMart 邀請碼註冊
+          </a>
+          <a href="https://promote.mexc.com/a/pM06womH" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
+            → MEXC 邀請碼註冊
+          </a>
+        </div>
       </div>
 
-      <p class="rebate-english">The option is always there.</p>
-
-      <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem;">
-        <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
-          → BitMart 邀請碼註冊
-        </a>
-        <a href="https://promote.mexc.com/a/pM06womH" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
-          → MEXC 邀請碼註冊
-        </a>
+      <div class="rebate-image" data-reveal="right">
+        <img src="/images/rebate-bg.png" alt="" class="rebate-img" />
       </div>
     </div>
     </div>
@@ -246,10 +252,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <div class="tool-image" data-reveal="right">
-      <div class="mexc-card-placeholder">
-        <span class="mexc-card-logo">MEXC × ether.fi</span>
-        <span class="mexc-card-type">Visa Credit Card</span>
-      </div>
+      <img src="/images/mexc-card.png" alt="MEXC × ether.fi Visa Card" class="tool-img tool-img--card" />
     </div>
     </div>
   </section>
@@ -555,9 +558,15 @@ import Layout from '../layouts/Layout.astro';
     padding: 120px 0;
   }
 
+  .rebate-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6vw;
+    align-items: center;
+  }
+
   .rebate-inner {
     max-width: 640px;
-    text-align: center;
   }
 
   .rebate-title {
@@ -579,7 +588,6 @@ import Layout from '../layouts/Layout.astro';
     gap: 1.4rem;
     text-align: left;
     max-width: 560px;
-    margin: 0 auto;
   }
 
   .rebate-body p {
@@ -593,6 +601,20 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 0.1em;
     color: var(--amber);
     margin-top: 3rem;
+  }
+
+  .rebate-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rebate-img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   }
 
   /* ---- BitMart ---- */
@@ -651,35 +673,6 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 0.08em;
     color: var(--amber);
     margin-top: 0.5rem;
-  }
-
-  /* ---- MEXC Card Placeholder ---- */
-  .mexc-card-placeholder {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    border: 1px solid rgba(196, 168, 74, 0.2);
-    border-radius: 16px;
-    padding: 3rem 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 260px;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-  }
-
-  .mexc-card-logo {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--amber);
-    letter-spacing: 0.05em;
-    margin-bottom: 0.75rem;
-  }
-
-  .mexc-card-type {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
   }
 
   /* ---- 試算器 ---- */
@@ -853,6 +846,15 @@ import Layout from '../layouts/Layout.astro';
 
     .tool-bitmart .tool-grid .tool-text {
       order: 1;
+    }
+
+    .rebate-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .rebate-image {
+      order: -1;
     }
 
     .calc-grid {
