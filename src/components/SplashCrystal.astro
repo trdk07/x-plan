@@ -357,7 +357,7 @@ gl_FragColor=vec4(col,alpha);\
     });
 
     // Hexagonal bipyramid geometry
-    var SIDES = 6, R = 0.90, H_BODY = 1.00, H_CAP = 0.55;
+    var SIDES = 6, R = 0.80, H_BODY = 1.00, H_CAP = 0.55;
     var verts = [], idx = [];
     for (var i = 0; i < SIDES; i++) {
       var a = (i / SIDES) * Math.PI * 2 + Math.PI / SIDES;
@@ -472,7 +472,7 @@ gl_FragColor=vec4(col,alpha);\
         tiltY = userRY + autoSpin + targetRY * 0.6;
       }
       sunMesh.rotation.x += (tiltX - sunMesh.rotation.x) * 0.10;
-      sunMesh.rotation.y += (tiltY - sunMesh.rotation.y) * 0.10;
+      sunMesh.rotation.y += 0.012;
       sunMesh.rotation.z += (baseTiltZ - sunMesh.rotation.z) * 0.04;
       sunMeshBack.rotation.copy(sunMesh.rotation);
 
