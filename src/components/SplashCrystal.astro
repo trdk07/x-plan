@@ -131,302 +131,328 @@
   }
 </style>
 
-<script is:inline>
-(function(){
-  var splash = document.getElementById('splash');
-  if (!splash) return;
+<script>
+  import * as THREE from 'three';
+  import gsap from 'gsap';
 
-  document.body.style.overflow = 'hidden';
+  const splash = document.getElementById('splash');
+  if (splash) {
+    document.body.style.overflow = 'hidden';
+    let isActive = true;
 
-  function loadScript(src){
-    return new Promise(function(resolve, reject){
-      var s = document.createElement('script');
-      s.src = src;
-      s.onload = resolve;
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
-
-  function boot(){
-    try { initCrystal(); } catch(e) { console.error('Crystal init error:', e); }
-    startIntro();
-    setupEnter();
-  }
-
-  function loadAndBoot(){
-    // If scripts already cached/loaded
-    if (typeof THREE !== 'undefined' && typeof gsap !== 'undefined') {
-      boot();
-      return;
-    }
-    Promise.all([
-      typeof THREE === 'undefined' ? loadScript('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js') : Promise.resolve(),
-      typeof gsap === 'undefined' ? loadScript('https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js') : Promise.resolve()
-    ]).then(boot).catch(function(){
-      startIntro();
-      setupEnter();
-    });
-  }
-
-  // Ensure DOM is ready before starting
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadAndBoot);
-  } else {
-    loadAndBoot();
-  }
-
-  var isActive = true;
-  var renderer, crystalGroup, sunMat, sunMesh, sunMeshBack, camera, scene, clock;
-
-  function initCrystal(){
-    var canvas = document.getElementById('crystal-canvas');
-    if (!canvas) return;
-
-    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    // ── Renderer ──
+    const canvas = document.getElementById('crystal-canvas') as HTMLCanvasElement;
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 2.35;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 0, 7.0);
 
-    // Procedural environment map
-    var envTex = buildEnvTexture();
+    // ── Environment texture ──
+    function buildEnvTexture() {
+      const c = document.createElement('canvas');
+      c.width = 2048; c.height = 1024;
+      const ctx = c.getContext('2d')!;
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, 2048, 1024);
+      ctx.globalCompositeOperation = 'lighter';
 
-    // Shaders
-    var NOISE = '\
-vec3 _m289v(vec3 x){return x-floor(x*(1./289.))*289.;}\
-vec4 _m289(vec4 x){return x-floor(x*(1./289.))*289.;}\
-vec4 _perm(vec4 x){return _m289(((x*34.)+1.)*x);}\
-vec4 _tis(vec4 r){return 1.79284291400159-0.85373472095314*r;}\
-float snoise(vec3 v){\
-const vec2 C=vec2(1./6.,1./3.);const vec4 D=vec4(0.,.5,1.,2.);\
-vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);\
-vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);\
-vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;\
-i=_m289v(i);\
-vec4 p=_perm(_perm(_perm(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));\
-float n_=.142857142857;vec3 ns=n_*D.wyz-D.xzx;\
-vec4 j=p-49.*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.*x_);\
-vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.-abs(x)-abs(y);\
-vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);\
-vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;\
-vec4 sh=-step(h,vec4(0.));\
-vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;\
-vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);\
-vec4 norm=_tis(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));\
-p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;\
-vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);\
-m=m*m;return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));\
-}';
+      const softboxes: [number, number, number, string][] = [
+        [480, 140, 320, 'rgba(255,255,255,1.0)'],
+        [1200, 200, 380, 'rgba(255,245,230,1.0)'],
+        [1700, 480, 260, 'rgba(255,235,200,1.0)'],
+      ];
+      softboxes.forEach(([cx, cy, r, col]) => {
+        const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        rg.addColorStop(0, col);
+        rg.addColorStop(0.25, 'rgba(255,255,255,0.55)');
+        rg.addColorStop(0.55, 'rgba(255,255,255,0.15)');
+        rg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = rg;
+        ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      });
 
-    var vertShader = NOISE + '\
-uniform float uTime;\
-uniform float uMorph;\
-varying vec3 vWorldNormal;\
-varying vec3 vViewDir;\
-varying vec3 vWorldPos;\
-void main(){\
-float n1=snoise(position*1.6+uTime*0.18);\
-float n2=snoise(position*3.4+uTime*0.28)*0.45;\
-float n3=snoise(position*7.0+uTime*0.42)*0.18;\
-float disp=(n1+n2+n3)*uMorph;\
-vec3 newPos=position+normal*disp;\
-vec4 wp=modelMatrix*vec4(newPos,1.0);\
-vWorldPos=wp.xyz;\
-float e=0.02;\
-float dx=snoise((position+vec3(e,0,0))*1.6+uTime*0.18)-n1;\
-float dy=snoise((position+vec3(0,e,0))*1.6+uTime*0.18)-n1;\
-float dz=snoise((position+vec3(0,0,e))*1.6+uTime*0.18)-n1;\
-vec3 perturbedNormal=normalize(normal-vec3(dx,dy,dz)*uMorph*4.0);\
-vWorldNormal=normalize(mat3(modelMatrix)*perturbedNormal);\
-vViewDir=normalize(wp.xyz-cameraPosition);\
-gl_Position=projectionMatrix*viewMatrix*wp;\
-}';
+      const sparkles: [number, number, number][] = [
+        [240, 280, 18], [920, 100, 14], [1480, 80, 20], [640, 360, 12],
+        [1860, 300, 10], [1080, 540, 16], [380, 560, 12], [1620, 720, 14],
+      ];
+      sparkles.forEach(([cx, cy, r]) => {
+        const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        rg.addColorStop(0, 'rgba(255,255,255,1)');
+        rg.addColorStop(0.4, 'rgba(255,255,255,0.4)');
+        rg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = rg;
+        ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      });
 
-    var fragShader = '\
-precision highp float;\
-uniform sampler2D uEnv;\
-uniform float uIOR;\
-uniform float uChroma;\
-uniform float uHold;\
-uniform float uTime;\
-uniform float uIsBack;\
-varying vec3 vWorldNormal;\
-varying vec3 vViewDir;\
-varying vec3 vWorldPos;\
-const float PI=3.14159265359;\
-vec2 dirToUV(vec3 d){\
-d=normalize(d);\
-float u=atan(d.z,d.x)/(2.0*PI)+0.5;\
-float v=asin(clamp(d.y,-1.0,1.0))/PI+0.5;\
-return vec2(u,v);\
-}\
-void main(){\
-vec3 fdx=dFdx(vWorldPos);\
-vec3 fdy=dFdy(vWorldPos);\
-vec3 N=normalize(cross(fdx,fdy));\
-vec3 toCam=normalize(cameraPosition-vWorldPos);\
-if(dot(N,toCam)<0.0)N=-N;\
-vec3 V=normalize(vViewDir);\
-float edgeFactor=pow(1.0-max(dot(N,toCam),0.0),1.8);\
-float ior=uIOR;\
-vec3 rRR=refract(V,N,ior*(1.0+uChroma*1.0));\
-vec3 rRO=refract(V,N,ior*(1.0+uChroma*0.5));\
-vec3 rGG=refract(V,N,ior);\
-vec3 rBO=refract(V,N,ior*(1.0-uChroma*0.5));\
-vec3 rBB=refract(V,N,ior*(1.0-uChroma*1.0));\
-vec3 sR=texture2D(uEnv,dirToUV(rRR)).rgb;\
-vec3 sRO=texture2D(uEnv,dirToUV(rRO)).rgb;\
-vec3 sGG=texture2D(uEnv,dirToUV(rGG)).rgb;\
-vec3 sBO=texture2D(uEnv,dirToUV(rBO)).rgb;\
-vec3 sBB=texture2D(uEnv,dirToUV(rBB)).rgb;\
-vec3 refracted=vec3(sR.r*0.55+sRO.r*0.45,sGG.g*0.70+sRO.g*0.15+sBO.g*0.15,sBB.b*0.55+sBO.b*0.45);\
-vec3 r2=refract(V,N*0.88+vec3(0.06,-0.04,0.05),ior*0.94);\
-vec3 internal=texture2D(uEnv,dirToUV(r2)).rgb;\
-refracted=mix(refracted,refracted*0.5+internal*0.6,0.40);\
-vec3 reflectDir=reflect(V,N);\
-vec3 reflected=texture2D(uEnv,dirToUV(reflectDir)).rgb;\
-float ndv=max(dot(N,-V),0.0);\
-float fr=0.04+0.96*pow(1.0-ndv,5.0);\
-float thickness=0.45+0.85*(1.0-edgeFactor);\
-vec3 absorption=exp(-vec3(0.12,0.45,2.2)*thickness*0.6);\
-vec3 body=refracted*absorption;\
-body+=vec3(0.12,0.06,0.01);\
-body=pow(body,vec3(0.84))*1.15;\
-vec3 col=mix(body,reflected,fr);\
-vec3 L1=normalize(vec3(0.6,0.9,0.5));\
-vec3 L2=normalize(vec3(-0.8,0.7,-0.4));\
-vec3 L3=normalize(vec3(0.2,-0.4,0.9));\
-vec3 L4=normalize(vec3(-0.4,-0.3,-0.8));\
-vec3 L5=normalize(vec3(0.9,-0.2,0.3));\
-float spec=0.0;\
-spec+=pow(max(dot(reflect(-L1,N),-V),0.0),180.0)*2.4;\
-spec+=pow(max(dot(reflect(-L2,N),-V),0.0),160.0)*2.0;\
-spec+=pow(max(dot(reflect(-L3,N),-V),0.0),220.0)*2.8;\
-spec+=pow(max(dot(reflect(-L4,N),-V),0.0),140.0)*1.6;\
-spec+=pow(max(dot(reflect(-L5,N),-V),0.0),200.0)*2.2;\
-col+=spec*vec3(3.2,3.4,3.0);\
-float rim=pow(1.0-ndv,3.5);\
-col+=vec3(1.4,1.1,0.3)*rim*0.85;\
-col.r+=rim*0.55*(0.5+0.5*sin(rim*13.0+uTime*0.5));\
-col.b+=rim*0.40*(0.5+0.5*sin(rim*13.0+uTime*0.5+3.14159));\
-col+=vec3(0.7,0.35,0.05)*uHold*fr*1.5;\
-col=pow(col,vec3(0.92));\
-float alpha;\
-if(uIsBack>0.5){col*=0.50;alpha=0.10+edgeFactor*0.45;}else{alpha=0.32+edgeFactor*0.63;}\
-gl_FragColor=vec4(col,alpha);\
-}';
+      const ab = ctx.createRadialGradient(1024, 880, 0, 1024, 880, 720);
+      ab.addColorStop(0, 'rgba(140,70,0,0.65)');
+      ab.addColorStop(0.5, 'rgba(60,30,0,0.35)');
+      ab.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = ab;
+      ctx.fillRect(0, 460, 2048, 564);
+      ctx.globalCompositeOperation = 'source-over';
 
-    var gemUniforms = {
+      const tex = new THREE.CanvasTexture(c);
+      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+      tex.minFilter = THREE.LinearMipmapLinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      tex.generateMipmaps = true;
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const envTex = buildEnvTexture();
+
+    // ── Shaders ──
+    const NOISE = `
+    vec3 _m289v(vec3 x){return x-floor(x*(1./289.))*289.;}
+    vec4 _m289(vec4 x){return x-floor(x*(1./289.))*289.;}
+    vec4 _perm(vec4 x){return _m289(((x*34.)+1.)*x);}
+    vec4 _tis(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+    float snoise(vec3 v){
+      const vec2 C=vec2(1./6.,1./3.);const vec4 D=vec4(0.,.5,1.,2.);
+      vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
+      vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
+      vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
+      i=_m289v(i);
+      vec4 p=_perm(_perm(_perm(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));
+      float n_=.142857142857;vec3 ns=n_*D.wyz-D.xzx;
+      vec4 j=p-49.*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.*x_);
+      vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.-abs(x)-abs(y);
+      vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
+      vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;
+      vec4 sh=-step(h,vec4(0.));
+      vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+      vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+      vec4 norm=_tis(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+      p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+      vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);
+      m=m*m;return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+    }`;
+
+    const vertShader = NOISE + `
+      uniform float uTime;
+      uniform float uMorph;
+      varying vec3 vWorldNormal;
+      varying vec3 vViewDir;
+      varying vec3 vWorldPos;
+      void main(){
+        float n1 = snoise(position * 1.6 + uTime * 0.18);
+        float n2 = snoise(position * 3.4 + uTime * 0.28) * 0.45;
+        float n3 = snoise(position * 7.0 + uTime * 0.42) * 0.18;
+        float disp = (n1 + n2 + n3) * uMorph;
+        vec3 newPos = position + normal * disp;
+        vec4 wp = modelMatrix * vec4(newPos, 1.0);
+        vWorldPos = wp.xyz;
+        float e = 0.02;
+        float dx = snoise((position + vec3(e,0,0)) * 1.6 + uTime * 0.18) - n1;
+        float dy = snoise((position + vec3(0,e,0)) * 1.6 + uTime * 0.18) - n1;
+        float dz = snoise((position + vec3(0,0,e)) * 1.6 + uTime * 0.18) - n1;
+        vec3 perturbedNormal = normalize(normal - vec3(dx,dy,dz) * uMorph * 4.0);
+        vWorldNormal = normalize(mat3(modelMatrix) * perturbedNormal);
+        vViewDir = normalize(wp.xyz - cameraPosition);
+        gl_Position = projectionMatrix * viewMatrix * wp;
+      }
+    `;
+
+    const fragShader = `
+      precision highp float;
+      uniform sampler2D uEnv;
+      uniform float uIOR;
+      uniform float uChroma;
+      uniform float uHold;
+      uniform float uTime;
+      uniform float uIsBack;
+      varying vec3 vWorldNormal;
+      varying vec3 vViewDir;
+      varying vec3 vWorldPos;
+      const float PI = 3.14159265359;
+
+      vec2 dirToUV(vec3 d){
+        d = normalize(d);
+        float u = atan(d.z, d.x) / (2.0 * PI) + 0.5;
+        float v = asin(clamp(d.y, -1.0, 1.0)) / PI + 0.5;
+        return vec2(u, v);
+      }
+
+      void main(){
+        vec3 fdx = dFdx(vWorldPos);
+        vec3 fdy = dFdy(vWorldPos);
+        vec3 N = normalize(cross(fdx, fdy));
+        vec3 toCam = normalize(cameraPosition - vWorldPos);
+        if (dot(N, toCam) < 0.0) N = -N;
+        vec3 V = normalize(vViewDir);
+        float edgeFactor = pow(1.0 - max(dot(N, toCam), 0.0), 1.8);
+
+        float ior = uIOR;
+        vec3 rRR = refract(V, N, ior * (1.0 + uChroma));
+        vec3 rRO = refract(V, N, ior * (1.0 + uChroma * 0.5));
+        vec3 rGG = refract(V, N, ior);
+        vec3 rBO = refract(V, N, ior * (1.0 - uChroma * 0.5));
+        vec3 rBB = refract(V, N, ior * (1.0 - uChroma));
+        vec3 sR  = texture2D(uEnv, dirToUV(rRR)).rgb;
+        vec3 sRO = texture2D(uEnv, dirToUV(rRO)).rgb;
+        vec3 sGG = texture2D(uEnv, dirToUV(rGG)).rgb;
+        vec3 sBO = texture2D(uEnv, dirToUV(rBO)).rgb;
+        vec3 sBB = texture2D(uEnv, dirToUV(rBB)).rgb;
+
+        vec3 refracted = vec3(
+          sR.r * 0.55 + sRO.r * 0.45,
+          sGG.g * 0.70 + sRO.g * 0.15 + sBO.g * 0.15,
+          sBB.b * 0.55 + sBO.b * 0.45
+        );
+
+        vec3 r2 = refract(V, N * 0.88 + vec3(0.06, -0.04, 0.05), ior * 0.94);
+        vec3 internal = texture2D(uEnv, dirToUV(r2)).rgb;
+        refracted = mix(refracted, refracted * 0.5 + internal * 0.6, 0.40);
+
+        vec3 reflectDir = reflect(V, N);
+        vec3 reflected = texture2D(uEnv, dirToUV(reflectDir)).rgb;
+        float ndv = max(dot(N, -V), 0.0);
+        float fr = 0.04 + 0.96 * pow(1.0 - ndv, 5.0);
+
+        float thickness = 0.45 + 0.85 * (1.0 - edgeFactor);
+        vec3 absorption = exp(-vec3(0.12, 0.45, 2.2) * thickness * 0.6);
+        vec3 body = refracted * absorption;
+        body += vec3(0.12, 0.06, 0.01);
+        body = pow(body, vec3(0.84)) * 1.15;
+        vec3 col = mix(body, reflected, fr);
+
+        vec3 L1 = normalize(vec3( 0.6,  0.9,  0.5));
+        vec3 L2 = normalize(vec3(-0.8,  0.7, -0.4));
+        vec3 L3 = normalize(vec3( 0.2, -0.4,  0.9));
+        vec3 L4 = normalize(vec3(-0.4, -0.3, -0.8));
+        vec3 L5 = normalize(vec3( 0.9, -0.2,  0.3));
+        float spec = 0.0;
+        spec += pow(max(dot(reflect(-L1, N), -V), 0.0), 180.0) * 2.4;
+        spec += pow(max(dot(reflect(-L2, N), -V), 0.0), 160.0) * 2.0;
+        spec += pow(max(dot(reflect(-L3, N), -V), 0.0), 220.0) * 2.8;
+        spec += pow(max(dot(reflect(-L4, N), -V), 0.0), 140.0) * 1.6;
+        spec += pow(max(dot(reflect(-L5, N), -V), 0.0), 200.0) * 2.2;
+        col += spec * vec3(3.2, 3.4, 3.0);
+
+        float rim = pow(1.0 - ndv, 3.5);
+        col += vec3(1.4, 1.1, 0.3) * rim * 0.85;
+        col.r += rim * 0.55 * (0.5 + 0.5 * sin(rim * 13.0 + uTime * 0.5));
+        col.b += rim * 0.40 * (0.5 + 0.5 * sin(rim * 13.0 + uTime * 0.5 + 3.14159));
+
+        col += vec3(0.7, 0.35, 0.05) * uHold * fr * 1.5;
+        col = pow(col, vec3(0.92));
+
+        float alpha;
+        if (uIsBack > 0.5) {
+          col *= 0.50;
+          alpha = 0.10 + edgeFactor * 0.45;
+        } else {
+          alpha = 0.32 + edgeFactor * 0.63;
+        }
+        gl_FragColor = vec4(col, alpha);
+      }
+    `;
+
+    // ── Material ──
+    const gemUniforms = {
       uEnv:    { value: envTex },
       uIOR:    { value: 0.72 },
       uChroma: { value: 0.022 },
       uHold:   { value: 0.0 },
       uTime:   { value: 0.0 },
       uMorph:  { value: 0.012 },
-      uIsBack: { value: 0.0 }
+      uIsBack: { value: 0.0 },
     };
 
-    sunMat = new THREE.ShaderMaterial({
+    const sunMat = new THREE.ShaderMaterial({
       uniforms: gemUniforms,
       vertexShader: vertShader,
       fragmentShader: fragShader,
       side: THREE.FrontSide,
       transparent: true,
       depthWrite: false,
-      blending: THREE.NormalBlending
+      blending: THREE.NormalBlending,
     });
 
-    var backUniforms = {};
-    for (var k in gemUniforms) backUniforms[k] = gemUniforms[k];
-    backUniforms.uIsBack = { value: 1.0 };
-
-    var sunMatBack = new THREE.ShaderMaterial({
-      uniforms: backUniforms,
+    const sunMatBack = new THREE.ShaderMaterial({
+      uniforms: { ...gemUniforms, uIsBack: { value: 1.0 } },
       vertexShader: vertShader,
       fragmentShader: fragShader,
       side: THREE.BackSide,
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending
+      blending: THREE.AdditiveBlending,
     });
 
-    // Hexagonal bipyramid geometry
-    var SIDES = 6, R = 0.80, H_BODY = 1.00, H_CAP = 0.55;
-    var verts = [], idx = [];
-    for (var i = 0; i < SIDES; i++) {
-      var a = (i / SIDES) * Math.PI * 2 + Math.PI / SIDES;
+    // ── Crystal geometry ──
+    const SIDES = 6, R = 0.65, H_BODY = 0.90, H_CAP = 0.50;
+    const verts: number[] = [];
+    const idx: number[] = [];
+    for (let i = 0; i < SIDES; i++) {
+      const a = (i / SIDES) * Math.PI * 2 + Math.PI / SIDES;
       verts.push(R * Math.cos(a), -H_BODY, R * Math.sin(a));
     }
-    for (var i = 0; i < SIDES; i++) {
-      var a = (i / SIDES) * Math.PI * 2 + Math.PI / SIDES;
+    for (let i = 0; i < SIDES; i++) {
+      const a = (i / SIDES) * Math.PI * 2 + Math.PI / SIDES;
       verts.push(R * Math.cos(a), +H_BODY, R * Math.sin(a));
     }
     verts.push(0, +H_BODY + H_CAP, 0);
     verts.push(0, -H_BODY - H_CAP, 0);
-    for (var i = 0; i < SIDES; i++) {
-      var j = (i + 1) % SIDES;
+    for (let i = 0; i < SIDES; i++) {
+      const j = (i + 1) % SIDES;
       idx.push(i, j, j + SIDES);
       idx.push(i, j + SIDES, i + SIDES);
     }
-    for (var i = 0; i < SIDES; i++) {
-      var j = (i + 1) % SIDES;
+    for (let i = 0; i < SIDES; i++) {
+      const j = (i + 1) % SIDES;
       idx.push(SIDES + i, SIDES + j, 12);
     }
-    for (var i = 0; i < SIDES; i++) {
-      var j = (i + 1) % SIDES;
+    for (let i = 0; i < SIDES; i++) {
+      const j = (i + 1) % SIDES;
       idx.push(j, i, 13);
     }
-    var geo = new THREE.BufferGeometry();
+    const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
     geo.setIndex(idx);
     geo.computeVertexNormals();
-    var sunGeo = geo.toNonIndexed();
+    const sunGeo = geo.toNonIndexed();
 
-    crystalGroup = new THREE.Group();
-    sunMeshBack = new THREE.Mesh(sunGeo, sunMatBack);
+    const crystalGroup = new THREE.Group();
+    const sunMeshBack = new THREE.Mesh(sunGeo, sunMatBack);
     sunMeshBack.renderOrder = 1;
     crystalGroup.add(sunMeshBack);
-    sunMesh = new THREE.Mesh(sunGeo, sunMat);
+    const sunMesh = new THREE.Mesh(sunGeo, sunMat);
     sunMesh.renderOrder = 2;
     crystalGroup.add(sunMesh);
     scene.add(crystalGroup);
 
-    // Drag interaction
-    var targetRX = 0, targetRY = 0;
-    var isDragging = false, dragStartX = 0, dragStartY = 0;
-    var dragBaseRX = 0, dragBaseRY = 0, userRX = 0, userRY = 0;
-    var lastDragEndTime = 0;
-    var DRAG_SENS = 0.0085;
+    // ── Drag interaction ──
+    let isDragging = false;
+    let dragStartX = 0, dragStartY = 0;
+    let dragBaseRX = 0, dragBaseRY = 0;
+    let userRX = 0, userRY = 0;
+    const DRAG_SENS = 0.0085;
 
-    canvas.addEventListener('mousemove', function(e){
+    canvas.addEventListener('mousemove', (e) => {
       if (isDragging) {
         userRY = dragBaseRY - (e.clientX - dragStartX) * DRAG_SENS;
         userRX = dragBaseRX - (e.clientY - dragStartY) * DRAG_SENS;
       }
     });
-    document.addEventListener('mousemove', function(e){
-      if (!isDragging) {
-        targetRX = (e.clientY / window.innerHeight - 0.5) * 0.55;
-        targetRY = (e.clientX / window.innerWidth  - 0.5) * 0.55;
-      }
-    });
-    canvas.addEventListener('touchmove', function(e){
+    canvas.addEventListener('touchmove', (e) => {
       if (isDragging && e.touches.length > 0) {
         userRY = dragBaseRY - (e.touches[0].clientX - dragStartX) * DRAG_SENS;
         userRX = dragBaseRX - (e.touches[0].clientY - dragStartY) * DRAG_SENS;
       }
     }, { passive: false });
 
-    function dragStart(e) {
+    function dragStart(e: MouseEvent | TouchEvent) {
       isDragging = true;
-      var px = e.touches ? e.touches[0].clientX : e.clientX;
-      var py = e.touches ? e.touches[0].clientY : e.clientY;
+      const px = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const py = 'touches' in e ? e.touches[0].clientY : e.clientY;
       dragStartX = px; dragStartY = py;
       dragBaseRX = userRX; dragBaseRY = userRY;
       gsap.to(sunMat.uniforms.uHold,   { value: 1,     duration: 0.6, ease: 'power2.out' });
@@ -435,10 +461,10 @@ gl_FragColor=vec4(col,alpha);\
       gsap.to(sunMat.uniforms.uMorph,  { value: 0.028, duration: 0.7, ease: 'power2.out' });
       gsap.to(crystalGroup.scale, { x: 1.06, y: 1.06, z: 1.06, duration: 0.6, ease: 'power2.out' });
     }
+
     function dragEnd() {
       if (!isDragging) return;
       isDragging = false;
-      lastDragEndTime = clock.getElapsedTime();
       gsap.to(sunMat.uniforms.uHold,   { value: 0,     duration: 0.6 });
       gsap.to(sunMat.uniforms.uIOR,    { value: 0.72,  duration: 0.7 });
       gsap.to(sunMat.uniforms.uChroma, { value: 0.022, duration: 0.7 });
@@ -451,98 +477,69 @@ gl_FragColor=vec4(col,alpha);\
     canvas.addEventListener('touchstart', dragStart, { passive: true });
     document.addEventListener('touchend', dragEnd);
 
-    // Render loop
-    clock = new THREE.Clock();
+    // ── Render loop ──
+    const clock = new THREE.Clock();
     function animate() {
       if (!isActive) return;
       requestAnimationFrame(animate);
-      var t = clock.getElapsedTime();
+      const t = clock.getElapsedTime();
       sunMat.uniforms.uTime.value = t;
 
-      var baseTiltZ = -0.20, baseTiltX = 0.16;
-      var tiltX, tiltY;
-      if (isDragging) {
-        tiltX = baseTiltX + userRX;
-        tiltY = userRY;
-      } else {
-        var sinceDrag = t - lastDragEndTime;
-        var autoBlend = Math.min(Math.max((sinceDrag - 0.6) / 1.4, 0), 1);
-        var autoSpin = (t - lastDragEndTime) * 0.25 * autoBlend;
-        tiltX = baseTiltX + userRX + targetRX * 0.45;
-        tiltY = userRY + autoSpin + targetRY * 0.6;
-      }
-      sunMesh.rotation.x += (tiltX - sunMesh.rotation.x) * 0.10;
-      sunMesh.rotation.y += 0.012;
-      sunMesh.rotation.z += (baseTiltZ - sunMesh.rotation.z) * 0.04;
-      sunMeshBack.rotation.copy(sunMesh.rotation);
+      // Continuous fast rotation + drag offset
+      crystalGroup.rotation.x = t * 0.15 + userRX + 0.16;
+      crystalGroup.rotation.y = t * 0.4 + userRY;
+      crystalGroup.rotation.z = -0.20;
 
       renderer.render(scene, camera);
     }
     animate();
 
-    // Resize
-    window.addEventListener('resize', function onResize() {
+    // ── Resize ──
+    function onResize() {
       if (!isActive) { window.removeEventListener('resize', onResize); return; }
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  }
+    }
+    window.addEventListener('resize', onResize);
 
-  function buildEnvTexture() {
-    var c = document.createElement('canvas');
-    c.width = 2048; c.height = 1024;
-    var ctx = c.getContext('2d');
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, 2048, 1024);
-    ctx.globalCompositeOperation = 'lighter';
-    [[480,140,320,'rgba(255,255,255,1.0)'],[1200,200,380,'rgba(255,245,230,1.0)'],[1700,480,260,'rgba(255,235,200,1.0)']].forEach(function(s){
-      var rg = ctx.createRadialGradient(s[0],s[1],0,s[0],s[1],s[2]);
-      rg.addColorStop(0,'rgba(255,255,255,1)');rg.addColorStop(0.25,'rgba(255,255,255,0.55)');
-      rg.addColorStop(0.55,'rgba(255,255,255,0.15)');rg.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle = rg;ctx.fillRect(s[0]-s[2],s[1]-s[2],s[2]*2,s[2]*2);
-    });
-    [[240,280,18],[920,100,14],[1480,80,20],[640,360,12],[1860,300,10],[1080,540,16],[380,560,12],[1620,720,14]].forEach(function(s){
-      var rg = ctx.createRadialGradient(s[0],s[1],0,s[0],s[1],s[2]);
-      rg.addColorStop(0,'rgba(255,255,255,1)');rg.addColorStop(0.4,'rgba(255,255,255,0.4)');rg.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle = rg;ctx.fillRect(s[0]-s[2],s[1]-s[2],s[2]*2,s[2]*2);
-    });
-    var ab = ctx.createRadialGradient(1024,880,0,1024,880,720);
-    ab.addColorStop(0,'rgba(140,70,0,0.65)');ab.addColorStop(0.5,'rgba(60,30,0,0.35)');ab.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle = ab;ctx.fillRect(0,460,2048,564);
-    ctx.globalCompositeOperation = 'source-over';
-    var tex = new THREE.CanvasTexture(c);
-    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    tex.minFilter = THREE.LinearMipmapLinearFilter;
-    tex.magFilter = THREE.LinearFilter;
-    tex.generateMipmaps = true;
-    tex.colorSpace = THREE.SRGBColorSpace;
-    return tex;
-  }
-
-  function startIntro() {
-    if (typeof gsap === 'undefined') return;
-    var tl = gsap.timeline();
-    // Light beam appears
+    // ── Splash intro timeline ──
+    const tl = gsap.timeline();
     tl.to('.light-beam', { opacity: 1, duration: 0.8, ease: 'power2.in' }, 0.6);
-    // Light beam pulses wider
     tl.to('.light-beam', { height: '6px', duration: 0.6, ease: 'power2.out' }, 1.2);
-    // Curtains split
     tl.to('.curtain-top', { yPercent: -100, duration: 2.0, ease: 'power3.inOut' }, 1.6);
     tl.to('.curtain-bottom', { yPercent: 100, duration: 2.0, ease: 'power3.inOut' }, 1.6);
-    // Light beam fades as curtains open
     tl.to('.light-beam', { opacity: 0, height: '60px', duration: 1.4, ease: 'power2.out' }, 2.0);
-    // Brand fades in
     tl.to('.splash-brand', { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, 3.2);
-    // Enter fades in
     tl.to('.splash-enter', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 3.7);
-  }
 
-  function setupEnter() {
-    var btn = document.getElementById('splash-enter');
-    if (!btn) return;
-    btn.addEventListener('click', exitSplash);
-    // Also allow Enter key
+    // ── Enter handler ──
+    function exitSplash() {
+      const btn = document.getElementById('splash-enter');
+      if (btn) btn.style.pointerEvents = 'none';
+
+      const exitTl = gsap.timeline();
+      exitTl.to(crystalGroup.scale, { x: 1.8, y: 1.8, z: 1.8, duration: 1.0, ease: 'power2.in' }, 0);
+      exitTl.to(sunMat.uniforms.uHold, { value: 3.0, duration: 0.8, ease: 'power2.in' }, 0);
+      exitTl.to('.splash-brand', { opacity: 0, duration: 0.4 }, 0);
+      exitTl.to('.splash-enter', { opacity: 0, duration: 0.4 }, 0);
+      exitTl.to('.splash-flash', { opacity: 1, duration: 0.5, ease: 'power2.in' }, 0.6);
+      exitTl.to('#splash', { opacity: 0, duration: 0.6, ease: 'power2.out' }, 1.0);
+      exitTl.call(cleanup, undefined, 1.6);
+    }
+
+    function cleanup() {
+      isActive = false;
+      renderer.dispose();
+      renderer.forceContextLoss();
+      const sp = document.getElementById('splash');
+      if (sp) sp.remove();
+      document.body.style.overflow = '';
+      document.dispatchEvent(new Event('splash-exited'));
+    }
+
+    const enterBtn = document.getElementById('splash-enter');
+    if (enterBtn) enterBtn.addEventListener('click', exitSplash);
     document.addEventListener('keydown', function onKey(e) {
       if (e.key === 'Enter') {
         document.removeEventListener('keydown', onKey);
@@ -550,45 +547,4 @@ gl_FragColor=vec4(col,alpha);\
       }
     });
   }
-
-  function exitSplash() {
-    var btn = document.getElementById('splash-enter');
-    if (btn) btn.style.pointerEvents = 'none';
-
-    if (typeof gsap === 'undefined') {
-      cleanup();
-      return;
-    }
-
-    var tl = gsap.timeline();
-    // Crystal scales up and brightens
-    if (crystalGroup) {
-      tl.to(crystalGroup.scale, { x: 1.8, y: 1.8, z: 1.8, duration: 1.0, ease: 'power2.in' }, 0);
-    }
-    if (sunMat) {
-      tl.to(sunMat.uniforms.uHold, { value: 3.0, duration: 0.8, ease: 'power2.in' }, 0);
-    }
-    // UI fades out
-    tl.to('.splash-brand', { opacity: 0, duration: 0.4 }, 0);
-    tl.to('.splash-enter', { opacity: 0, duration: 0.4 }, 0);
-    // Flash
-    tl.to('.splash-flash', { opacity: 1, duration: 0.5, ease: 'power2.in' }, 0.6);
-    // Splash fades out
-    tl.to('#splash', { opacity: 0, duration: 0.6, ease: 'power2.out' }, 1.0);
-    // Cleanup
-    tl.call(cleanup, null, 1.6);
-  }
-
-  function cleanup() {
-    isActive = false;
-    if (renderer) {
-      renderer.dispose();
-      renderer.forceContextLoss();
-    }
-    var sp = document.getElementById('splash');
-    if (sp) sp.remove();
-    document.body.style.overflow = '';
-    document.dispatchEvent(new Event('splash-exited'));
-  }
-})();
 </script>
