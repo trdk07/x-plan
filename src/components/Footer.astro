@@ -91,14 +91,24 @@
     height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
+    animation: footer-breathe 2s ease-in-out infinite;
   }
 
   .footer-dot--orange {
     background: #E8943A;
+    --dot-color: #E8943A;
+    --dot-glow: 232, 148, 58;
   }
 
   .footer-dot--green {
     background: #4ADE80;
+    --dot-color: #4ADE80;
+    --dot-glow: 74, 222, 128;
+  }
+
+  @keyframes footer-breathe {
+    0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--dot-color); }
+    50% { opacity: 0.4; box-shadow: 0 0 8px var(--dot-color), 0 0 16px rgba(var(--dot-glow), 0.3); }
   }
 
   .footer-bottom {
