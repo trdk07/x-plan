@@ -289,12 +289,13 @@ import Calculator from '../components/Calculator.astro';
     <div class="paths-grid">
       <div class="path-left" data-reveal="left">
         <h3 class="path-name">X翻倉計畫</h3>
-        <p class="path-tagline">限收 30 人，有篩選<br />免費開始，兩個月後再談。</p>
+        <p class="path-tagline">限收 30 人，有篩選<br />免費開始，一個月後再談。</p>
 
         <ul class="path-list">
-          <li>— 交易指標（兩個月免費）</li>
+          <li>— 交易指標（一個月免費）</li>
           <li>— 玄學日報</li>
-          <li>— Binance × Bitget 監控</li>
+          <li>— 加密貨幣 AI監控</li>
+          <li>— 妖幣監測</li>
           <li>— 教學 + 真實交易紀錄</li>
           <li>— 一起在市場裡活下去的群體</li>
         </ul>
@@ -310,6 +311,7 @@ import Calculator from '../components/Calculator.astro';
 
         <ul class="path-list">
           <li>— 玄學日報 15U / 月</li>
+          <li>— 妖幣監測 20U / 月</li>
           <li>— 交易指標 100U / 3 個月</li>
           <li>— 不需要入群</li>
           <li>— 換回自己的交易所也能用</li>
@@ -345,7 +347,7 @@ import Calculator from '../components/Calculator.astro';
       </p>
 
       <p>
-        前兩個月免費<br />
+        前一個月免費<br />
         之後，只要你保持著交易紀律、穩定地留在市場裡<br />
         （別誤會，我不是要你頻繁刷交易量）<br />
         費用的事我們再談
@@ -364,7 +366,7 @@ import Calculator from '../components/Calculator.astro';
       </p>
 
       <div class="route-meta">
-        <p><strong>本期名額：30 人</strong></p>
+        <p><strong>每期名額：30 人</strong></p>
         <p>入群需要填寫申請表，我會篩選</p>
       </div>
     </div>
@@ -382,7 +384,7 @@ import Calculator from '../components/Calculator.astro';
     <div class="container">
     <span class="section-number">07 &nbsp; 路線 B — 單獨訂閱</span>
 
-    <div class="route-b-grid">
+    <div class="route-b-grid route-b-grid--three">
       <div class="route-b-item">
         <h3 class="route-b-name">玄學日報</h3>
         <p class="route-b-price">15U <span>/ 月</span></p>
@@ -397,12 +399,25 @@ import Calculator from '../components/Calculator.astro';
       <div class="route-b-divider" aria-hidden="true"></div>
 
       <div class="route-b-item">
+        <h3 class="route-b-name">妖幣監測</h3>
+        <p class="route-b-price">20U <span>/ 月</span></p>
+        <p class="route-b-desc">
+          Binance × OKX × Bitget 掃描<br />
+          暴漲暴跌即時預警<br />
+          Rick 自動判讀推送
+        </p>
+        <a href="#subscribe" class="arrow-link" style="margin-top: 1.5rem; display: inline-flex;">訂閱妖幣監測 →</a>
+      </div>
+
+      <div class="route-b-divider" aria-hidden="true"></div>
+
+      <div class="route-b-item">
         <h3 class="route-b-name">交易指標</h3>
         <p class="route-b-price">100U <span>/ 3 個月</span></p>
         <p class="route-b-desc">
           整合七種技術分析<br />
           TradingView 上使用<br />
-          入群兩個月免費含在內
+          入群一個月免費含在內
         </p>
         <a href="#subscribe" class="arrow-link" style="margin-top: 1.5rem; display: inline-flex;">聯絡訂閱 →</a>
       </div>
@@ -418,7 +433,7 @@ import Calculator from '../components/Calculator.astro';
     <div class="renewal-inner">
       <h2 class="renewal-title">想要繼續留下來？</h2>
       <p class="renewal-body">
-        兩個月後，我們看你的交易狀況再說<br />
+        一個月後，我們看你的交易狀況再說<br />
         適合的人，歡迎一起成為同學。
       </p>
     </div>
@@ -892,6 +907,12 @@ import Calculator from '../components/Calculator.astro';
     margin-top: 2rem;
   }
 
+  .route-b-grid--three {
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    gap: 0 3vw;
+    max-width: 960px;
+  }
+
   .route-b-divider {
     background: var(--amber);
     opacity: 0.2;
@@ -953,7 +974,8 @@ import Calculator from '../components/Calculator.astro';
   /* Mobile */
   @media (max-width: 768px) {
     .paths-grid,
-    .route-b-grid {
+    .route-b-grid,
+    .route-b-grid--three {
       grid-template-columns: 1fr;
     }
 

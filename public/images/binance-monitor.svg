@@ -21,11 +21,11 @@
 
   <!-- Avatar -->
   <circle cx="68" cy="26" r="18" fill="#1A3A5A"/>
-  <text x="68" y="31" font-family="system-ui" font-size="9" fill="#F3BA2F" text-anchor="middle" font-weight="700">B×BG</text>
+  <text x="68" y="31" font-family="system-ui" font-size="9" fill="#F3BA2F" text-anchor="middle" font-weight="700">AI</text>
 
   <!-- Channel name -->
-  <text x="92" y="22" font-family="-apple-system, system-ui" font-size="14" font-weight="600" fill="#FFFFFF">Binance x Bitget 監控</text>
-  <text x="92" y="38" font-family="-apple-system, system-ui" font-size="12" fill="#6C7883">每日早晚 AI 聚合報告</text>
+  <text x="92" y="22" font-family="-apple-system, system-ui" font-size="14" font-weight="600" fill="#FFFFFF">加密貨幣 AI監控</text>
+  <text x="92" y="38" font-family="-apple-system, system-ui" font-size="12" fill="#6C7883">Binance × Bitget × OKX 聚合</text>
 
   <!-- Content -->
   <g clip-path="url(#content-clip2)">
