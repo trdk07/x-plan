@@ -124,12 +124,6 @@ import SplashCrystal from '../components/SplashCrystal.astro';
         <span class="stat-context">篩選制，不開放候補</span>
       </div>
       <div class="stat-block" data-reveal="up">
-        <span class="stat-number" data-count="200">0</span>
-        <span class="stat-unit">×</span>
-        <span class="stat-label">BitMart 槓桿</span>
-        <span class="stat-context">精算流，Maker 費率最低</span>
-      </div>
-      <div class="stat-block" data-reveal="up">
         <span class="stat-number" data-count="500">0</span>
         <span class="stat-unit">×</span>
         <span class="stat-label">MEXC 槓桿</span>
@@ -238,19 +232,6 @@ import SplashCrystal from '../components/SplashCrystal.astro';
     <div class="exchange-section" data-reveal="up">
       <h3 class="exchange-heading">不是最好的交易所，但是合適於這樣的思路</h3>
       <div class="exchange-grid">
-
-        <div class="exchange-card">
-          <div class="exchange-header">
-            <span class="exchange-name">BitMart</span>
-            <span class="exchange-tag">出金首選</span>
-          </div>
-          <ul class="exchange-features">
-            <li>加密貨幣 Visa 卡，全球刷卡消費</li>
-            <li>最高 8% 刷卡返現</li>
-            <li>支援多幣種出金，到帳快速</li>
-          </ul>
-          <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="exchange-cta">註冊 BitMart →</a>
-        </div>
 
         <div class="exchange-card">
           <div class="exchange-header">
@@ -680,7 +661,7 @@ import SplashCrystal from '../components/SplashCrystal.astro';
 
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
   }
 
@@ -844,7 +825,8 @@ import SplashCrystal from '../components/SplashCrystal.astro';
 
   .exchange-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    max-width: 560px;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);

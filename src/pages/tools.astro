@@ -3,7 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="工具 & 產品" description="玄學日報、交易指標、幣安監控、BitMart Card — 每一個都是實際在用的工具。">
+<Layout title="工具 & 產品" description="玄學日報、交易指標、幣安監控、MEXC Card — 每一個都是實際在用的工具。">
 
   <!-- ============================================================
        Opening
@@ -150,9 +150,6 @@ import Layout from '../layouts/Layout.astro';
         <p class="rebate-english">The option is always there.</p>
 
         <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem;">
-          <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
-            → BitMart 邀請碼註冊
-          </a>
           <a href="https://www.mexc.com/zh-TW/acquisition/custom-sign-up?shareCode=mexc-Xplan" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
             → MEXC 邀請碼註冊
           </a>
@@ -167,69 +164,12 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- ============================================================
-       Tool 4 — BitMart Card (even)
-       ============================================================ -->
-  <section class="tool-section tool-even tool-bitmart">
-    <div class="container tool-grid">
-    <div class="tool-image" data-reveal="right">
-      <img src="/images/bitmart-card.png" alt="BitMart Card" class="tool-img tool-img--card" />
-    </div>
-
-    <div class="tool-text" data-reveal="left">
-      <span class="section-number">05</span>
-      <h2 class="tool-name">BitMart Card</h2>
-      <p class="tool-desc">
-        出金一直是加密貨幣的痛點<br />
-        這張卡換個方式解決這件事——<br />
-        直接在台灣日常消費裡用掉它。
-      </p>
-      <p class="tool-desc">
-        綁定 Google Pay 和 Line Pay<br />
-        手機感應，結帳。
-      </p>
-
-      <div class="cashback-table">
-        <div class="cashback-row">
-          <span class="cashback-label">超商 / 速食（7-11、全家、麥當勞）</span>
-          <span class="cashback-rate">5% – 5.5%</span>
-        </div>
-        <div class="cashback-row">
-          <span class="cashback-label">外送 / 網購（FoodPanda、蝦皮）</span>
-          <span class="cashback-rate">3.5% – 4%</span>
-        </div>
-        <div class="cashback-row">
-          <span class="cashback-label">一般消費</span>
-          <span class="cashback-rate">3.5%</span>
-        </div>
-      </div>
-
-      <p class="cashback-meta">
-        免申請費。免年費。虛擬卡直接開<br />
-        <em>VIP 等級靠合約交易量升級。高頻短單的交易量，本來就比一般人高。</em>
-      </p>
-
-      <p class="cashback-close">打單賺錢，刷卡也在賺。</p>
-      <p class="cashback-english">That's the compounding effect of a consistent method.</p>
-
-      <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
-        <a href="https://my-fanpage.vercel.app/" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
-          → 了解 BitMart Card
-        </a>
-        <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="arrow-link" style="display: inline-flex;">
-          → 邀請碼註冊
-        </a>
-      </div>
-    </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
        Tool 5 — MEXC × ether.fi Card (odd)
        ============================================================ -->
   <section class="tool-section tool-odd tool-mexc-card">
     <div class="container tool-grid">
     <div class="tool-text" data-reveal="left">
-      <span class="section-number">06</span>
+      <span class="section-number">05</span>
       <h2 class="tool-name">MEXC × ether.fi 聯名信用卡</h2>
       <p class="tool-desc">
         專為高頻玩家打造的返現神卡<br />
@@ -288,70 +228,11 @@ import Layout from '../layouts/Layout.astro';
        ============================================================ -->
   <section class="calc-section">
     <div class="container">
-      <span class="section-number">07</span>
+      <span class="section-number">06</span>
       <h2 class="calc-main-title">手續費試算器</h2>
       <p class="calc-main-desc">開倉前先算清楚成本，這是紀律的一部分。</p>
 
       <div class="calc-grid">
-
-        <!-- BitMart 試算器 -->
-        <div class="calc-card" id="calcBitmart">
-          <h3 class="calc-title">BitMart 合約試算</h3>
-          <div class="calc-form">
-            <div class="calc-field">
-              <label>計算模式</label>
-              <select data-calc="mode">
-                <option value="margin">USDT 本金 + 槓桿</option>
-                <option value="quantity">幣種數量 (顆數)</option>
-              </select>
-            </div>
-            <div class="calc-field">
-              <label>交易幣種</label>
-              <select data-calc="coin">
-                <option value="60000">BTC ($60,000)</option>
-                <option value="3000">ETH ($3,000)</option>
-              </select>
-            </div>
-            <div class="calc-field">
-              <label>訂單類型</label>
-              <select data-calc="order">
-                <option value="0.0006">Taker 吃單 (0.06%)</option>
-                <option value="0.0002">Maker 掛單 (0.02%)</option>
-              </select>
-            </div>
-            <div class="calc-field">
-              <label data-calc="amountLabel">投入本金 (USDT)</label>
-              <input type="number" data-calc="amount" value="100" min="0" step="any" />
-            </div>
-            <div class="calc-field" data-calc="leverageWrap">
-              <label>槓桿倍數 (最高 200x)</label>
-              <div class="calc-slider-row">
-                <input type="range" data-calc="leverage" min="1" max="200" value="100" />
-                <span class="calc-lever-val" data-calc="leverageVal">100x</span>
-              </div>
-            </div>
-          </div>
-          <div class="calc-results">
-            <div class="calc-result-row">
-              <span>總倉位價值</span>
-              <span data-calc="totalValue">0.00 USDT</span>
-            </div>
-            <div class="calc-result-row">
-              <span>單邊手續費</span>
-              <span class="calc-fee" data-calc="oneWay">0.00 USDT</span>
-            </div>
-            <div class="calc-result-row">
-              <span>一進一出成本</span>
-              <span class="calc-fee" data-calc="roundTrip">0.00 USDT</span>
-            </div>
-            <div class="calc-result-row calc-result-row--last" data-calc="percentWrap">
-              <span>佔本金比例</span>
-              <span class="calc-fee" data-calc="percent">0.00%</span>
-            </div>
-          </div>
-          <p class="calc-note">* Maker 0.02% / Taker 0.06%</p>
-          <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="calc-cta">註冊 BitMart →</a>
-        </div>
 
         <!-- MEXC 試算器 -->
         <div class="calc-card" id="calcMexc">
@@ -643,7 +524,7 @@ import Layout from '../layouts/Layout.astro';
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   }
 
-  /* ---- BitMart ---- */
+  /* ---- Card Cashback ---- */
   .cashback-table {
     margin-top: 1.5rem;
     display: flex;
@@ -722,7 +603,8 @@ import Layout from '../layouts/Layout.astro';
 
   .calc-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    max-width: 560px;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
@@ -866,14 +748,6 @@ import Layout from '../layouts/Layout.astro';
       order: 1;
     }
 
-    .tool-bitmart .tool-grid .tool-image {
-      order: 2;
-    }
-
-    .tool-bitmart .tool-grid .tool-text {
-      order: 1;
-    }
-
     .rebate-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
@@ -883,8 +757,5 @@ import Layout from '../layouts/Layout.astro';
       order: -1;
     }
 
-    .calc-grid {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

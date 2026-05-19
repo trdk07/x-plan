@@ -23,43 +23,6 @@
 
   <div class="bp-cards">
 
-    <!-- BitMart -->
-    <div class="bp-exchange-card">
-      <div class="bp-exchange-header bp-header--bma">BitMart <span>精算流</span></div>
-
-      <div class="bp-scenario">
-        <div class="bp-scenario-head">
-          <span>全掛單（Maker 進 / Maker 出）</span>
-          <span class="bp-rate-tag">總費率 0.04%</span>
-        </div>
-        <div class="bp-row">
-          <span>回本所需跳動點數</span>
-          <span class="bp-val" id="bmMakerBe">0.00 點</span>
-        </div>
-        <div class="bp-row bp-row--profit">
-          <span>扣除手續費真實淨利</span>
-          <span class="bp-val" id="bmMakerNet">0.00 USDT</span>
-        </div>
-      </div>
-
-      <div class="bp-scenario">
-        <div class="bp-scenario-head">
-          <span>全市價（Taker 進 / Taker 出）</span>
-          <span class="bp-rate-tag">總費率 0.12%</span>
-        </div>
-        <div class="bp-row">
-          <span>回本所需跳動點數</span>
-          <span class="bp-val" id="bmTakerBe">0.00 點</span>
-        </div>
-        <div class="bp-row bp-row--profit">
-          <span>扣除手續費真實淨利</span>
-          <span class="bp-val" id="bmTakerNet">0.00 USDT</span>
-        </div>
-      </div>
-
-      <a href="https://www.bitmart.com/zh-TW/invite/cMPDb9" target="_blank" rel="noopener" class="bp-cta">註冊 BitMart →</a>
-    </div>
-
     <!-- MEXC -->
     <div class="bp-exchange-card">
       <div class="bp-exchange-header bp-header--mexc">MEXC <span>市價流</span></div>
@@ -107,8 +70,6 @@
   var positionSize = document.getElementById('bpPositionSize');
 
   var rates = {
-    bmMaker: 0.0004,   // 0.02% × 2
-    bmTaker: 0.0012,   // 0.06% × 2
     mexcMaker: 0.0008,  // 0.04% × 2
     mexcTaker: 0.0008   // 0.04% × 2
   };
@@ -134,8 +95,6 @@
       netEl.className = 'bp-val ' + (net >= 0 ? 'bp-profit' : 'bp-loss');
     }
 
-    update('bmMakerBe', 'bmMakerNet', rates.bmMaker);
-    update('bmTakerBe', 'bmTakerNet', rates.bmTaker);
     update('mexcMakerBe', 'mexcMakerNet', rates.mexcMaker);
     update('mexcTakerBe', 'mexcTakerNet', rates.mexcTaker);
   }
@@ -205,7 +164,8 @@
 
   .bp-cards {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    max-width: 560px;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
@@ -230,10 +190,6 @@
     font-weight: 400;
     color: var(--text-muted);
     margin-left: 0.5rem;
-  }
-
-  .bp-header--bma {
-    border-left: 3px solid var(--amber);
   }
 
   .bp-header--mexc {
@@ -314,10 +270,6 @@
 
   @media (max-width: 768px) {
     .bp-inputs {
-      grid-template-columns: 1fr;
-    }
-
-    .bp-cards {
       grid-template-columns: 1fr;
     }
   }
