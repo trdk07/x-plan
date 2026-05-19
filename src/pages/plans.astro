@@ -71,32 +71,6 @@ import Calculator from '../components/Calculator.astro';
 
     <div class="fee-exchanges">
       <div class="fee-exchange-col">
-        <h3 class="fee-exchange-name">BitMart</h3>
-        <p class="fee-exchange-rate">Maker 0.02% / Taker 0.06%　·　最高 200×</p>
-
-        <div class="scenarios">
-          <div class="scenario">
-            <span class="scenario-label">10× 槓桿 / 100U 本金</span>
-            <p class="scenario-calc">1,000U 部位 → Taker 0.06%</p>
-            <p class="scenario-fee">0.60 USDT <em>（單邊）</em></p>
-            <p class="scenario-insight">來回 1.2U，佔本金 1.2%</p>
-          </div>
-          <div class="scenario">
-            <span class="scenario-label">50× 槓桿 / 100U 本金</span>
-            <p class="scenario-calc">5,000U 部位 → Taker 0.06%</p>
-            <p class="scenario-fee">3.00 USDT <em>（單邊）</em></p>
-            <p class="scenario-insight">來回 6U，佔本金 6%</p>
-          </div>
-          <div class="scenario">
-            <span class="scenario-label">200× 槓桿 / 100U 本金</span>
-            <p class="scenario-calc">20,000U 部位 → Taker 0.06%</p>
-            <p class="scenario-fee">12.00 USDT <em>（單邊）</em></p>
-            <p class="scenario-insight">來回 24U，佔本金 24%</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="fee-exchange-col">
         <h3 class="fee-exchange-name">MEXC</h3>
         <p class="fee-exchange-rate">統一費率 0.04%　·　最高 500×</p>
 
@@ -124,8 +98,7 @@ import Calculator from '../components/Calculator.astro';
     </div>
 
     <p class="fee-takeaway" data-reveal="fade">
-      同樣的倉位，MEXC 的 Taker 成本比 BitMart 低 33%。<br />
-      而且 Maker 掛單也是 0.04%——市價逃命不會被多收。
+      統一費率 0.04%，不管 Maker 或 Taker——市價逃命不會被多收。
     </p>
     </div>
   </section>
@@ -150,21 +123,6 @@ import Calculator from '../components/Calculator.astro';
 
         <div class="breakeven-compare">
           <div class="breakeven-col">
-            <h4>BitMart</h4>
-            <div class="breakeven-item">
-              <span class="breakeven-type">全掛單（Maker 進出）</span>
-              <span class="breakeven-rate">總費率 0.04%</span>
-              <p class="breakeven-math">3,000 × 0.04% = <strong>1.2 點</strong></p>
-              <p class="breakeven-result">ETH 漲到 3,001.2 就打平<br />之後每跳 1 點都是純利潤</p>
-            </div>
-            <div class="breakeven-item">
-              <span class="breakeven-type">全市價（Taker 進出）</span>
-              <span class="breakeven-rate">總費率 0.12%</span>
-              <p class="breakeven-math">3,000 × 0.12% = <strong>3.6 點</strong></p>
-              <p class="breakeven-result">需要漲到 3,003.6 才回本</p>
-            </div>
-          </div>
-          <div class="breakeven-col">
             <h4>MEXC</h4>
             <div class="breakeven-item">
               <span class="breakeven-type">不管掛單或市價</span>
@@ -183,21 +141,6 @@ import Calculator from '../components/Calculator.astro';
 
         <div class="breakeven-compare">
           <div class="breakeven-col">
-            <h4>BitMart</h4>
-            <div class="breakeven-item">
-              <span class="breakeven-type">全掛單</span>
-              <span class="breakeven-rate">0.04%</span>
-              <p class="breakeven-math">60,000 × 0.04% = <strong>24 點</strong></p>
-              <p class="breakeven-result">BTC 漲過 24 點即回本</p>
-            </div>
-            <div class="breakeven-item">
-              <span class="breakeven-type">全市價</span>
-              <span class="breakeven-rate">0.12%</span>
-              <p class="breakeven-math">60,000 × 0.12% = <strong>72 點</strong></p>
-              <p class="breakeven-result">BTC 漲過 72 點才回本</p>
-            </div>
-          </div>
-          <div class="breakeven-col">
             <h4>MEXC</h4>
             <div class="breakeven-item">
               <span class="breakeven-type">統一費率</span>
@@ -212,9 +155,8 @@ import Calculator from '../components/Calculator.astro';
     </div>
 
     <p class="breakeven-bottom" data-reveal="fade">
-      看到差距了嗎？<br />
-      BitMart 掛單最省，但你必須確保成交。<br />
-      MEXC 不管怎麼打，成本都一樣——對市價派來說，這就是主場優勢。
+      MEXC 不管掛單還是市價，成本都一樣——<br />
+      對短線市價派來說，這就是主場優勢。
     </p>
     </div>
   </section>
@@ -233,19 +175,19 @@ import Calculator from '../components/Calculator.astro';
         <span class="compare-leverage">10×</span>
         <span class="compare-dots">··················</span>
         <span class="compare-result">1,000U</span>
-        <span class="compare-exchange">BitMart · MEXC</span>
+        <span class="compare-exchange">MEXC</span>
       </div>
       <div class="compare-row" data-reveal="up">
         <span class="compare-leverage">50×</span>
         <span class="compare-dots">··················</span>
         <span class="compare-result">5,000U</span>
-        <span class="compare-exchange">BitMart · MEXC</span>
+        <span class="compare-exchange">MEXC</span>
       </div>
       <div class="compare-row compare-row--big" data-reveal="up">
         <span class="compare-leverage compare-leverage--big">200×</span>
         <span class="compare-dots">··················</span>
         <span class="compare-result compare-result--big">20,000U</span>
-        <span class="compare-exchange">BitMart 最高 · MEXC</span>
+        <span class="compare-exchange">MEXC</span>
       </div>
       <div class="compare-row compare-row--big" data-reveal="up">
         <span class="compare-leverage compare-leverage--big" style="color: var(--text);">500×</span>
@@ -517,7 +459,8 @@ import Calculator from '../components/Calculator.astro';
 
   .fee-exchanges {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    max-width: 560px;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
@@ -649,7 +592,8 @@ import Calculator from '../components/Calculator.astro';
 
   .breakeven-compare {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    max-width: 400px;
     gap: 2rem;
   }
 
@@ -988,11 +932,6 @@ import Calculator from '../components/Calculator.astro';
 
     .fee-exchanges {
       grid-template-columns: 1fr;
-    }
-
-    .breakeven-compare {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
     }
 
     .compare-row {
